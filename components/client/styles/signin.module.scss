@@ -1,0 +1,56 @@
+$button-text-color: #FFFFFF;
+
+.signinForm{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem !important;
+
+  .formLabel{
+    display: block;
+    position: relative;
+    font-size: 0.875rem;
+  }
+
+  button{
+    color: $button-text-color;
+    display: flex;
+    justify-content: center;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0.313rem;
+  }
+}
+
+.formSettings{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+
+  p{
+    text-align: center;
+    font-size: 0.875rem;
+
+    a{
+      font-weight: 500;
+      text-decoration: none;
+    }
+  }
+}
+
+@media screen and (width <= 640px){
+  .signinForm{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 28rem;
+  }
+}
+
+@media screen and (width > 640px){
+  .signinForm{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 28rem;
+  }
+}

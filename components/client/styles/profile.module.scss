@@ -1,0 +1,39 @@
+$profile-data-container: #FFCACA;
+
+.profileContainer{
+  display: flex;
+  justify-content: center;
+
+  .profileData{
+    background-color: $profile-data-container;
+    width: 100%;
+    max-width: 28rem;
+    border-radius: 0.5rem;
+    padding-block: 1rem;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+
+    h2{
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .data{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.25rem;
+
+    span{
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 991px){
+  .profileData{
+    margin-top: 1rem;
+  }
+}

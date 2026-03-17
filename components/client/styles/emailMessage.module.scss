@@ -1,0 +1,21 @@
+.messageContainer{
+  text-align: center;
+  max-width: fit-content !important;
+  margin: 0 auto;
+  padding-block: 3rem;
+  padding-inline: 1.5rem;
+}
+
+.alertContainer{
+  align-items: center;
+  max-width: fit-content !important;
+
+  div{
+    display: flex;
+    border-radius: 0.75rem;
+  }
+
+  svg{
+    margin-right: 0.5rem;
+  }
+}
