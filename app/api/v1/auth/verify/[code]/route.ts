@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { INTERNAL_SERVER_ERROR, OK } from "@/components/server/constants/httpCodes";
 
 import { connectDB } from "@/components/server/config/connection";
-import { zodVerificationCodeSchema } from "@/components/server/schemas/zod/zod-auth/zodVerificationCode";
+import { zodVerificationCodeSchema } from "@/components/server/schemas/zod/zod-auth/ZodVerificationCode";
 import { verifyEmail } from "@/components/server/utils/email/verifyEmail";
 
 export async function GET(
