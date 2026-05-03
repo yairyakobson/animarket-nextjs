@@ -1,4 +1,4 @@
-export const getVerifyEmailTemplate = (url: string) =>({
+export const emailVerificationTemplate = (url: string) =>({
   subject: "Verify Email Address",
   text: `Click on the link to verify your email address: ${url}`,
   html: `
