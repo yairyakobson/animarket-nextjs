@@ -1,11 +1,9 @@
 export interface UserQueryData{
-  _id: string;
+  id: string;
   name: string;
   email: string;
   avatar: string;
-  picture?: {
-    public_id: string;
-    url: string;
-    signed_url: string;
-  };
+  public_id: string | null;
+  url: string | null;
+  signed_url: string | null;
 }
