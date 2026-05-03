@@ -1,27 +1,30 @@
-import { APP_ORIGIN, SMTP_FROM_EMAIL } from "../constants/env-keys";
-import { createVerificationCode } from "../dataAccess/verification";
+import {
+  SMTP_FROM_NAME,
+  SMTP_FROM_EMAIL,
+  NODE_ENV
+} from "../constants/env-keys";
 
-import { getVerifyEmailTemplate } from "../utils/email/templates/verifyEmailTemplate";
-import { oneYearFromNow } from "../utils/date";
+import { EmailOptions } from "../serverInterfaces/emailInterface";
+import { emailTransporter } from "../utils/email/emailTransporter";
 
-import VerificationCodeType from "../constants/verificationCodeType";
-import sendEmail from "../utils/email/sendEmail";
+const mailingSystem = async(options: EmailOptions): Promise<void> =>{
+  const message = {
+    from: NODE_ENV === "development"
+    ? `${SMTP_FROM_NAME} <noreply@auth.com>`
+    : `${SMTP_FROM_NAME} <${SMTP_FROM_EMAIL}>`,
+    to: options.to,
+    subject: options.subject,
+    text: options.text,
+    html: options.html
+  };
+  
+  try{
+    await emailTransporter.sendMail(message);
+  }
+  catch(error){
+    console.error("Nodemailer OAuth Error:", error);
+    throw new Error("Failed to send email");
+  }
+};
 
-export async function mailingSystem(newUser: string, email: string){
-  const emailVerify = await createVerificationCode({
-    name: newUser,
-    type: VerificationCodeType.EmailVerification,
-    expiresAt: oneYearFromNow()
-  });
-
-  const url = `${APP_ORIGIN}/email/verify/${emailVerify._id}`;
-  const emailTemplate = getVerifyEmailTemplate(url);
-
-  await sendEmail({
-    from: SMTP_FROM_EMAIL,
-    to: email,
-    subject: emailTemplate.subject,
-    text: emailTemplate.text,
-    html: emailTemplate.html
-  });
-}
+export default mailingSystem;
