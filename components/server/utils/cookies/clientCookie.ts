@@ -15,15 +15,13 @@ export async function getServerUser(): Promise<UserQueryData | null>{
     const decoded = verifyToken(token, JWT_SECRET) as JWTPayload;
 
     return{
-      _id: decoded.id,
+      id: decoded.id,
       name: decoded.name,
       email: decoded.email,
       avatar: decoded.avatar,
-      picture: {
-        public_id: decoded.picture.public_id,
-        url: decoded.picture.url,
-        signed_url: decoded.picture.signed_url
-      }
+      public_id: decoded.public_id ?? null,
+      url: decoded.url ?? null,
+      signed_url: decoded.signed_url ?? null
     };
   }
   catch{

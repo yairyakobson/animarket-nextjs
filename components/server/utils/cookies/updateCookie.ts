@@ -1,13 +1,15 @@
 import { cookies } from "next/headers";
-import { oneWeekFromNow } from "../date";
 
-export async function updateUserCookie(user: any){
-  const newToken = user.getJwtToken();
+import { getJwtToken } from "../userUtils/getJwtToken"
+import { oneWeekFromNow } from "../date";
+import { User } from "@/drizzle-utils/schemas";
+
+export async function updateUserCookie(user: User){
+  const newToken = getJwtToken(user);
   const cookieStore = await cookies();
 
   cookieStore.set("token", newToken, {
     name: "token",
-    value: newToken,
     httpOnly: true,
     path: "/",
     expires: oneWeekFromNow(),
