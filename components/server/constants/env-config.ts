@@ -1,4 +1,4 @@
-// Checks if our MONGO_URI is valid (string) or undefined (not found, missing or wrong uri)
+// Checks if enviroment variables are missing
 export const getEnv = (key: string, defaultValue?: string): string =>{
   const value = process.env[key] || defaultValue;
 
