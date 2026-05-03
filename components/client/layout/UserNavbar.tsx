@@ -33,7 +33,7 @@ function UserNavbar(){
     window.location.replace("/");
   }
 
-  const activeSrc = user?.picture?.url || user?.avatar || "";
+  const activeSrc = user?.url || user?.avatar || "";
 
   return(
     <>

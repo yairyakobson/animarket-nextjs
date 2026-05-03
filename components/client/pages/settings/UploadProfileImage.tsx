@@ -13,12 +13,12 @@ const UploadProfileImage = ({ initialUser }: UploadImageFunctions) =>{
     public_id: string;
     image: File | null;
   }>({
-    public_id: initialUser?.picture?.public_id || "",
+    public_id: initialUser?.public_id || "",
     image: null
   });
   
   const { user: reduxUser } = useAppSelector((state) => state.user);
-  const activeUserId = reduxUser?._id || initialUser?._id;
+  const activeUserId = reduxUser?.id || initialUser?.id;
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
     const selectedFile = e.target.files?.[0];
@@ -28,8 +28,8 @@ const UploadProfileImage = ({ initialUser }: UploadImageFunctions) =>{
   };
 
   const onUpload = async() =>{
-    const newImageKey = initialUser?.picture?.public_id
-    || reduxUser?.picture?.public_id;
+    const newImageKey = initialUser?.public_id
+    || reduxUser?.public_id;
 
     if(!selectedFileRef.current.image || !activeUserId){
       console.error("Missing File or User ID");
@@ -53,18 +53,21 @@ const UploadProfileImage = ({ initialUser }: UploadImageFunctions) =>{
     else{
       throw new Error(result?.message || "Upload failed");
     }
+    return result;
   };
 
   const onDelete = async() =>{
-    const oldImageKey = initialUser?.picture?.public_id
-    || reduxUser?.picture?.public_id;
+    const oldImageKey = initialUser?.public_id
+    || reduxUser?.public_id;
 
     if(!activeUserId || !oldImageKey) return;
 
     const formData = new FormData();
     formData.append("mode", "delete");
     formData.append("oldKey", oldImageKey);
-    await imageActionHandler(formData, activeUserId);
+    
+    const result = await imageActionHandler(formData, activeUserId);
+    return result;
   };
 
   return(

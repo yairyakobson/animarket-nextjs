@@ -11,6 +11,6 @@ export interface UploadImageFunctions extends UploadImageProps{
   }>;
   
   fileHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleUpload: () => Promise<void>;
-  handleDelete: () => Promise<void>;
+  handleUpload: () => Promise<any>;
+  handleDelete: () => Promise<any>;
 }

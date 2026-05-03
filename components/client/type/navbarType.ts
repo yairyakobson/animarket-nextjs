@@ -5,10 +5,8 @@ type NavbarProps = {
     name: string;
     email: string;
     avatar: string;
-    picture?: {
-      public_id: string;
-      url: string;
-      signed_url: string;
-    }
+    public_id?: string;
+    url?: string;
+    signed_url?: string;
   } | null;
 };

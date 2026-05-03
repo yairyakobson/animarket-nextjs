@@ -73,7 +73,7 @@ const UploadProfileImageForm = ({
           key={displayImage}
           alt={`${resolvedUser?.name}`}
           className={uploadImageStyles.image}/>
-          {(imgPreview || (!!resolvedUser?.picture?.url && !isReverting)) ? (
+          {(imgPreview || (!!resolvedUser?.url && !isReverting)) ? (
             <IoMdTrash
             className={uploadImageStyles.removeIcon}
             onClick={stageRemoval}/>
