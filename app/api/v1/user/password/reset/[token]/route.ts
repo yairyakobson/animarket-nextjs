@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { BAD_REQUEST, OK } from "@/components/server/constants/httpCodes";
 
-import { connectDB } from "@/components/server/config/connection";
 import {
   deleteResetPasswordEntry,
+  hashResettedPassword,
   updateResettedPassword
 } from "@/components/server/dataAccess/password";
 import { zodResetPasswordSchema } from "@/components/server/schemas/zod/zod-password/ZodResetPassword";
+import { hashValue } from "@/components/server/utils/bcrypt/hashValue";
 
 import AppError from "@/components/server/utils/appError";
 import errorHandler from "@/components/server/middleware/errorHandler";
@@ -15,17 +16,9 @@ import VerificationCodeType from "@/components/server/constants/verificationCode
 
 export async function PUT(req: NextRequest,
   context: { params: Promise<{ token: string }> }){
-    
-  await connectDB();
 
   try{
     const { token } = await context.params;
-
-    const user = await updateResettedPassword(token);
-
-    if(!user){
-      throw new AppError(BAD_REQUEST, "Invalid or expired reset token");
-    }
 
     const body = await req.json();
     const parsed = zodResetPasswordSchema.safeParse(body);
@@ -37,17 +30,19 @@ export async function PUT(req: NextRequest,
     }
 
     const { newPassword } = parsed.data;
+    const hashedNewPassword = await hashValue(newPassword);
 
-    user.password = newPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
+    const user = await updateResettedPassword(token);
+
+    if(!user){
+      throw new AppError(BAD_REQUEST, "Invalid or expired reset token");
+    }
+    await hashResettedPassword(hashedNewPassword, user);
 
     await deleteResetPasswordEntry({
-      name: user?._id,
+      userId: user?.id,
       type: VerificationCodeType.PasswordReset
     });
-
-    await user.save();
 
     return NextResponse.json({
       message: "Password reset was successful",

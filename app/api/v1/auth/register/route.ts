@@ -8,18 +8,15 @@ import {
 } from "@/components/server/constants/httpCodes";
 import { PLACEHOLDER_URL } from "@/components/server/constants/env-keys";
 
-import { connectDB } from "@/components/server/config/connection";
 import { zodRegisterSchema } from "@/components/server/schemas/zod/zod-auth/ZodRegister";
-import { mailingSystem } from "@/components/server/useCases/mailingSystem";
-import { registerUser } from "@/components/server/dataAccess/users";
+import { insertUser, registerUser } from "@/components/server/dataAccess/users";
 
 import AppError from "@/components/server/utils/appError";
 import errorHandler from "@/components/server/middleware/errorHandler";
-import User from "@/components/server/schemas/mongoose/User";
+import { userVerificationEmail } from "@/components/server/utils/email/verificationEmail";
+import { hashValue } from "@/components/server/utils/bcrypt/hashValue";
 
 export async function POST(req: NextRequest){
-  await connectDB();
-
   try{
     const body = await req.json();
     const parsed = zodRegisterSchema.safeParse(body);
@@ -30,9 +27,9 @@ export async function POST(req: NextRequest){
       }, { status: BAD_REQUEST });
     }
     
-    const { email, name, password } = parsed.data;
+    const { name, email, password } = parsed.data;
 
-    const duplicatedUserKeys = await registerUser(name, email);
+    const duplicatedUserKeys = await registerUser({ name, email });
 
     if(duplicatedUserKeys){
       throw new AppError(CONFLICT, "User and/or Email Address already exists");
@@ -46,15 +43,15 @@ export async function POST(req: NextRequest){
 
     const seed = `${initials}-${uuidv4()}`;
     const placeholderURL = `${PLACEHOLDER_URL}/${seed}`
+    const hashedPassword = await hashValue(password);
     
-    const newUser = new User({
-      email,
+    const newUser = await insertUser({
       name,
-      password,
+      email,
+      password: hashedPassword,
       avatar: placeholderURL
     });
-    await newUser.save();
-    await mailingSystem(newUser._id as string, email);
+    await userVerificationEmail(newUser.id as string, email);
 
     return NextResponse.json({
       message: "A verification email has been sent"

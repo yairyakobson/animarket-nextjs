@@ -3,13 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { NODE_ENV } from "@/components/server/constants/env-keys";
 import { OK } from "@/components/server/constants/httpCodes";
 
-import { connectDB } from "@/components/server/config/connection";
 import { verifyJwtToken } from "@/components/server/utils/tokens/verificationToken";
 import { userStatus } from "@/components/server/dataAccess/users";
 
 export async function GET(req: NextRequest){
-  await connectDB();
-
   try{
     const token = req.cookies.get("token")?.value;
 

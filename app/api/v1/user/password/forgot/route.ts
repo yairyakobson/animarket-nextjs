@@ -6,26 +6,21 @@ import {
   NOT_FOUND,
   TOO_MANY_REQUESTS
 } from "@/components/server/constants/httpCodes";
-import { APP_ORIGIN, SMTP_FROM_EMAIL } from "@/components/server/constants/env-keys";
+import { APP_ORIGIN } from "@/components/server/constants/env-keys";
 
-import { connectDB } from "@/components/server/config/connection";
-
-import { findUserPassword } from "@/components/server/dataAccess/password";
 import { ZodForgotPassword } from "@/components/server/schemas/zod/zod-password/ZodForgotPassword";
-import { resetPasswordEmailTemplate } from "@/components/server/utils/email/templates/resetPasswordTemplate";
-import { fiveMinutesAgo, oneHourFromNow } from "@/components/server/utils/date";
-
+import { findUserPassword, resetPasswordRecord } from "@/components/server/dataAccess/password";
 import {
   createResetPasswordCode,
   createResetPasswordEmail
 } from "@/components/server/dataAccess/verification";
+import { resetPasswordEmailTemplate } from "@/components/server/utils/email/templates/resetPasswordTemplate";
+import { oneHourFromNow } from "@/components/server/utils/date";
+import { resetPasswordEmail } from "@/components/server/utils/email/resetPasswordEmail";
 
-import sendEmail from "@/components/server/utils/email/sendEmail";
 import VerificationCodeType from "@/components/server/constants/verificationCodeType";
 
 export async function POST(req: NextRequest){
-  await connectDB();
-
   const body = await req.json();
   const parsed = ZodForgotPassword.safeParse(body);
       
@@ -46,9 +41,8 @@ export async function POST(req: NextRequest){
   }
 
   const recentReset = await createResetPasswordEmail({
-    name: user?._id,
-    type: VerificationCodeType.PasswordReset,
-    createdAt: { $gt: fiveMinutesAgo() }
+    userId: user?.id,
+    type: VerificationCodeType.PasswordReset
   });
 
   if(recentReset){
@@ -56,37 +50,30 @@ export async function POST(req: NextRequest){
       message: "An email has already been sent. Try again later."
     }, { status: TOO_MANY_REQUESTS });
   }
-
-  const resetToken = user.getResetPasswordToken();
-  await user.save();
-
-  await createResetPasswordCode({
-    name: user?._id,
-    token: resetToken,
+  
+  const resetRecord = await createResetPasswordCode({
+    userId: user?.id,
     type: VerificationCodeType.PasswordReset,
     expiresAt: oneHourFromNow()
   });
+  const resetToken = resetRecord.id;
+
+  await resetPasswordRecord({
+    userId: user.id,
+    resetPasswordToken: resetToken,
+    resetPasswordExpire: oneHourFromNow()
+  });
 
   const resetUrl = `${APP_ORIGIN}/reset-password/${resetToken}`;
-  const message = resetPasswordEmailTemplate(user?.name, resetUrl);
+  resetPasswordEmailTemplate(user?.name, resetUrl);
 
   try{
-    await sendEmail({
-      from: SMTP_FROM_EMAIL,
-      to: email,
-      subject: message?.subject,
-      text: message?.text,
-      html: message?.html
-   });
-   return NextResponse.json({
-     message: `The Email has been sent to: ${user?.email}`
-   }, { status: CREATED });
+    await resetPasswordEmail(user.id, user.email, resetToken);
+    return NextResponse.json({
+      message: `The Email has been sent to: ${user?.email}`
+    }, { status: CREATED });
   }
   catch(error: unknown){
-    user.resetPasswordToken = undefined
-    user.resetPasswordExpire = undefined
-    await user.save();
-
     return NextResponse.json({
       message: "Failed to send reset email"
     }, { status: BAD_REQUEST });

@@ -1,18 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt";
 
 import { BAD_REQUEST, OK } from "@/components/server/constants/httpCodes";
 
-import { connectDB } from "@/components/server/config/connection";
-import { isAuthenticatedUser } from "@/components/server/utils/auth";
-import { updateUserPassword } from "@/components/server/dataAccess/users";
-import { sendToken } from "@/components/server/utils/jwt/jwtToken";
 import { ZodChangePassword } from "@/components/server/schemas/zod/zod-password/ZodChangePassword";
+import { fetchUserById, updateUserPassword } from "@/components/server/dataAccess/users";
+
+import { comparePassword } from "@/components/server/utils/userUtils/comparePassword";
+import { isAuthenticatedUser } from "@/components/server/utils/auth";
+import { sendToken } from "@/components/server/utils/jwt/jwtToken";
 
 import AppError from "@/components/server/utils/appError";
 import errorHandler from "@/components/server/middleware/errorHandler";
 
 export async function PUT(req: NextRequest){
-  await connectDB();
 
   try{
     const body = await req.json();
@@ -26,11 +27,10 @@ export async function PUT(req: NextRequest){
     
     const { currentPassword, newPassword } = parsed.data;
     
-    const userId = await isAuthenticatedUser();
+    const user = await isAuthenticatedUser();
+    await fetchUserById(user?.id);
 
-    const user = await updateUserPassword(userId);
-
-    const isMatchedPass = await user.compareNewPassword(currentPassword);
+    const isMatchedPass = await comparePassword(currentPassword, user?.password);
     if(!isMatchedPass){
       throw new AppError(BAD_REQUEST, "Old Password Is Incorrect");
     }
@@ -38,8 +38,8 @@ export async function PUT(req: NextRequest){
     if(currentPassword === newPassword){
       throw new AppError(BAD_REQUEST, "New password must be different");
     }
-    user.password = newPassword;
-    await user.save();
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const updatedUser = await updateUserPassword(user.id, hashedNewPassword);
 
     return await sendToken(user, OK, {
       message: "Password successfully changed"
