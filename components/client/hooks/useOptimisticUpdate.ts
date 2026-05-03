@@ -1,12 +1,15 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { ActionResponse } from "../clientInterfaces/actionInterface";
+
 import { setUser } from "../redux/features/userSlice";
+import { UserQueryData } from "../clientInterfaces/userQueryInterface";
 
 export const useOptimisticUpdate = (
   resolvedUser: any,
-  handleUpload: () => Promise<void>,
-  handleDelete: () => Promise<void>
+  handleUpload: () => Promise<ActionResponse>,
+  handleDelete: () => Promise<ActionResponse>
 ) =>{
   const [imgPreview, setImgPreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -14,7 +17,7 @@ export const useOptimisticUpdate = (
 
   const dispatch = useDispatch();
 
-  const currentSource = resolvedUser?.picture?.url || resolvedUser?.avatar;
+  const currentSource = resolvedUser?.url || resolvedUser?.avatar;
 
   const displayImage = imgPreview
   ? imgPreview
@@ -27,7 +30,7 @@ export const useOptimisticUpdate = (
 
   const stageRemoval = useCallback(() =>{
     setImgPreview(null);
-    if(resolvedUser?.picture?.url){
+    if(resolvedUser?.url){
       setIsReverting(true);
     }
   }, [resolvedUser]);
@@ -38,26 +41,37 @@ export const useOptimisticUpdate = (
 
     try{
       if(isReverting){
+        await handleDelete();
+        setImgPreview(null);
         dispatch(setUser({
           ...resolvedUser,
-          picture: undefined
+          url: ""
         }));
-        await handleDelete();
       }
       else if(imgPreview){
+        const localPreview = imgPreview;
         dispatch(setUser({
           ...resolvedUser,
-          picture: {
-            public_id: "temp",
-            url: imgPreview
-        }}));
-        await handleUpload();
-        setImgPreview(null);
+          url: localPreview
+        }));
+
+        const response = await handleUpload();
+
+        if(response?.success && response?.user){
+          setImgPreview(null);
+          const sanitizedUser = JSON.parse(JSON.stringify(response?.user))
+          dispatch(setUser(sanitizedUser as UserQueryData));
+        }
+        else{
+          dispatch(setUser(previousUserData));
+          setImgPreview(null);
+        }
       }
       return { success: true }
     }
     catch(error){
       dispatch(setUser(previousUserData));
+      setImgPreview(null);
       throw error; 
     }
     finally{
