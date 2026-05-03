@@ -1,34 +1,82 @@
-import verificationCodeSchema from "../schemas/mongoose/VerificationCode";
+import { and, eq, gt } from "drizzle-orm";
+
+import { db } from "@/drizzle-utils/main-config";
+import { verificationCodes } from "@/drizzle-utils/schemas";
 
 export const createVerificationEmail = async(query: {
-  _id: string;
+  userId: string;
   type: string;
-  expiresAt: { $gt: Date };
 }) =>{
-  return await verificationCodeSchema.findOne(query);
+  const [verificationEmailResult] = await db
+  .select()
+  .from(verificationCodes)
+  .where(
+    and(
+      eq(verificationCodes.userId, query.userId),
+      eq(verificationCodes.type, query.type),
+      gt(verificationCodes.expiresAt, new Date())
+    )
+  )
+  .limit(1);
+
+  return verificationEmailResult;
 }
 
 export const createVerificationCode = async(query: {
-  name: unknown;
+  userId: string;
   type: string;
   expiresAt: Date;
 }) =>{
-  return await verificationCodeSchema.create(query);
+  const [verificationCode] = await db
+  .insert(verificationCodes)
+  .values({
+    userId: query.userId,
+    type: query.type,
+    expiresAt: query.expiresAt
+  })
+  .returning();
+
+  return verificationCode;
+}
+
+export const deleteVerificationCodeEntry = async(validCode: string) =>{
+  return await db
+  .delete(verificationCodes)
+  .where(eq(verificationCodes.id, validCode));
 }
 
 export const createResetPasswordEmail = async(query: {
-  name: unknown;
+  userId: string;
   type: string;
-  createdAt: { $gt: Date }
 }) =>{
-  return await verificationCodeSchema.countDocuments(query);
+  const [ResetPasswordEmailResult] = await db
+  .select()
+  .from(verificationCodes)
+  .where(
+    and(
+      eq(verificationCodes.userId, query.userId),
+      eq(verificationCodes.type, query.type),
+      gt(verificationCodes.expiresAt, new Date())
+    )
+  )
+  .limit(1);
+
+  return ResetPasswordEmailResult;
 }
 
 export const createResetPasswordCode = async(query: {
-  name: unknown;
-  token: string;
+  userId: string;
   type: string;
   expiresAt: Date;
 }) =>{
-  return await verificationCodeSchema.create(query);
+  const [resetPasswordCode] = await db
+  .insert(verificationCodes)
+  .values({
+    userId: query.userId,
+    type: query.type,
+    expiresAt: query.expiresAt
+  })
+  .returning();
+
+  return resetPasswordCode;
 }
