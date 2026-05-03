@@ -7,8 +7,11 @@ export const fiveMinutesAgo = () =>
 export const fifteenMinutesFromNow = () =>
   new Date(Date.now() + 15 * 60 * 1000);
 
-export const oneHourFromNow = () =>
-  new Date(Date.now() + 60 * 60 * 1000);
+export const oneHourFromNow = () =>{
+  const date = new Date();
+  date.setHours(date.getHours() + 1);
+  return date;
+}
 
 export const oneWeekFromNow = () =>
   new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);

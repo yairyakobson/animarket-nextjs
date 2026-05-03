@@ -63,7 +63,7 @@ export async function imageActionHandler(
     revalidatePath("/");
     return{
       success: true,
-      user: JSON.parse(JSON.stringify(updatedUser))
+      user: updatedUser
     };
   }
   catch(error){

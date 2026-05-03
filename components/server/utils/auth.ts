@@ -5,6 +5,7 @@ import { JWT_SECRET } from "../constants/env-keys";
 import { UNAUTHORIZED } from "../constants/httpCodes";
 
 import { fetchUser } from "../dataAccess/users";
+
 import AppError from "./appError";
 
 export const isAuthenticatedUser = async() =>{
