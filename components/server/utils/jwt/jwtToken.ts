@@ -2,14 +2,15 @@ import { NextResponse } from "next/server";
 
 import { COOKIE_EXPIRATION_TIME, NODE_ENV } from "../../constants/env-keys";
 
-import { CookieOptions } from "../../serverInterfaces/cookieInterface";
+import { getJwtToken } from "../userUtils/getJwtToken";
+import { User } from "@/drizzle-utils/schemas";
 
 export async function sendToken(
-  user: CookieOptions,
+  user: User,
   statusCode: number,
   payload: Record<string, any> = {}
 ){
-  const token = user.getJwtToken(); // Create JWT Token
+  const token = getJwtToken(user); // Create JWT Token
 
   const cookieExpirationDays = Number(COOKIE_EXPIRATION_TIME) || 7; // fallback: 7 days
   const expires = new Date(Date.now() + cookieExpirationDays * 24 * 60 * 60 * 1000);
@@ -17,9 +18,9 @@ export async function sendToken(
   const response = NextResponse.json({
     ...payload,
     user: {
-      _id: user._id.toString(),
-      name: user.name,
-      email: user.email
+      _id: user.id?.toString(),
+      name: user?.name,
+      email: user?.email
     },
     token
   }, { status: statusCode });
