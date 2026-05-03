@@ -1,35 +1,106 @@
-import mongoose, { QueryOptions, UpdateQuery } from "mongoose";
+import { eq, or } from "drizzle-orm";
 
-import User from "../schemas/mongoose/User";
+import { db } from "@/drizzle-utils/main-config";
+import { User, users } from "@/drizzle-utils/schemas";
 
-export const registerUser = async(email: string, name: string) =>{
-  return await User.findOne({
-    $or: [{ email }, { name }]
-  });
+export const registerUser = async ({ name, email }: {
+  name: string;
+  email: string
+}) => {
+  const [registrationResult] = await db
+  .select()
+  .from(users)
+  .where(
+    or(
+      eq(users.name, name),
+      eq(users.email, email)
+    )
+  )
+  .limit(1);
+
+  return registrationResult;
+}
+
+export const insertUser = async(query: {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}) =>{
+  const [insertResult] = await db
+  .insert(users)
+  .values(query)
+  .returning();
+
+  return insertResult;
 }
 
 export const loginUser = async(email: string) =>{
-  return await User.findOne({ email });
+  const [loginResult] = await db
+  .select()
+  .from(users)
+  .where(eq(users.email, email))
+  .limit(1);
+
+  return loginResult;
 }
 
 export const fetchUser = async(query: string) =>{
-  return await User.findById(query).select("-password");
+  const [fetchResult] = await db
+  .select()
+  .from(users)
+  .where(
+    or(
+      eq(users.id, query),
+      eq(users.name, query)
+    )
+  )
+  .limit(1);
+
+  return fetchResult;
+}
+
+export const fetchUserById = async(query: string) =>{
+  const [fetchUserIdResult] = await db
+  .select()
+  .from(users)
+  .where(eq(users.id, query))
+  .limit(1);
+
+  return fetchUserIdResult;
 }
 
 export const userStatus = async(query: string, status: string) =>{
-  return await User.findByIdAndUpdate(query, { status });
-}
+  const [userStatusResult] = await db
+  .update(users)
+  .set({ status })
+  .where(eq(users.id, query))
+  .returning();
 
-export const updateUserPassword = async(query: string) =>{
-  return await User.findById(query);
+   return userStatusResult;
 }
 
 export const updateUserStatus = async(
-  query: mongoose.Types.ObjectId,
-  verified: UpdateQuery<typeof User>,
-  newStatus: QueryOptions<typeof User>
+  userId: string,
+  query: Partial<User>
 ) =>{
-  return await User.findByIdAndUpdate(query, verified, newStatus);
+  const [updateUserResult] = await db
+  .update(users)
+  .set(query)
+  .where(eq(users.id, userId))
+  .returning();
+
+  return updateUserResult;
+}
+
+export const updateUserPassword = async(id: string, hashedPass: string) =>{
+  const [updatePasswordResult] = await db
+  .update(users)
+  .set({ password: hashedPass })
+  .where(eq(users.id, id))
+  .returning();
+
+   return updatePasswordResult;
 }
 
 export const uploadUserImage = async(
@@ -40,31 +111,31 @@ export const uploadUserImage = async(
     signed_url: string
   }
 ) =>{
-  if(!mongoose.Types.ObjectId.isValid(userId)){
-    throw new Error("Invalid User ID format");
-  }
+  const [uploadImageResult] = await db
+  .update(users)
+  .set({
+    public_id: image.public_id,
+    url: image.url,
+    signed_url: image.signed_url
+  })
+  .where(eq(users.id, userId))
+  .returning();
 
-  return await User.findOneAndUpdate(
-    { _id: new mongoose.Types.ObjectId(userId) },
-    {
-      $set: {
-        picture: {
-          public_id: image.public_id,
-          url: image.url,
-          signed_url: image.signed_url
-        }
-      }
-    },
-    { returnDocument: "after", runValidators: true }
-  );
+  return uploadImageResult;
 }
 
 export const deleteUserImage = async(
   userId: string
 ) =>{
-  return await User.findOneAndUpdate(
-    { _id: new mongoose.Types.ObjectId(userId) },
-    { $unset: { picture: "" } },
-    { returnDocument: "after" }
-  );
+  const [deleteImageResult] = await db
+  .update(users)
+  .set({
+    public_id: null,
+    url: null,
+    signed_url: null
+  })
+  .where(eq(users.id, userId))
+  .returning();
+
+  return deleteImageResult;
 }
