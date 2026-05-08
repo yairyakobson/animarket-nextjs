@@ -119,7 +119,7 @@ const SignupForm: React.FC<SignupProps> = ({
             </FloatingLabel>
           </section>
     
-          <Button type="submit"
+          <Button type="submit" variant="danger"
           disabled={isLoading}>Sign Up</Button>
 
           <p>Already have an account?{" "}

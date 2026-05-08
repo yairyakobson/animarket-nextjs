@@ -59,7 +59,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
             </FloatingLabel>
           </section>
     
-          <Button type="submit"
+          <Button type="submit" variant="danger"
           disabled={isLoading}>Send</Button>
         </Form>
       </Container>

@@ -90,7 +90,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
             </FloatingLabel>
           </section>
 
-          <Button type="submit"
+          <Button type="submit" variant="danger"
           disabled={isLoading}>Reset Password</Button>
         </Form>
       </Container>
