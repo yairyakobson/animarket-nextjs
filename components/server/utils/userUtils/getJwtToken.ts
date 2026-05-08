@@ -12,7 +12,8 @@ export function getJwtToken(user: User){
       avatar: user.avatar,
       public_id: user.public_id,
       url: user.url,
-      signed_url: user.signed_url
+      signed_url: user.signed_url,
+      createdAt: user.createdAt
     },
     JWT_SECRET,
     { expiresIn: "7d" }

@@ -18,7 +18,8 @@ export default async function ProfilePage({ params }: ProfilePageProps){
       <UserSidebar>
         <Profile
         username={user?.name}
-        email={user?.email}/>
+        email={user?.email}
+        createdAt={user?.createdAt}/>
       </UserSidebar>
     </>
   );

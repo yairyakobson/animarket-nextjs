@@ -6,4 +6,5 @@ export interface JWTPayload{
   public_id: string;
   url: string;
   signed_url: string;
+  createdAt: Date;
 }

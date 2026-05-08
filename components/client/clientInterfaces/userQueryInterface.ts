@@ -6,4 +6,5 @@ export interface UserQueryData{
   public_id: string | null;
   url: string | null;
   signed_url: string | null;
+  createdAt: Date;
 }

@@ -18,6 +18,7 @@ export async function getServerUser(): Promise<UserQueryData | null>{
       id: decoded.id,
       name: decoded.name,
       email: decoded.email,
+      createdAt: decoded.createdAt,
       avatar: decoded.avatar,
       public_id: decoded.public_id ?? null,
       url: decoded.url ?? null,

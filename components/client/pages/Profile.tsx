@@ -1,41 +1,56 @@
 "use client";
 
-import { Button, Col, Container } from "react-bootstrap";
+import { useMemo } from "react";
+import { Col, Container, Image, Row } from "react-bootstrap";
 
+import { useAppSelector } from "../hooks/useAppSelector";
 import { ProfileProps } from "../clientInterfaces/pages/profileProps";
 
 import profileStyles from "../styles/profile.module.scss";
 
-export default function Profile({ username, email }: ProfileProps){
+export default function Profile({
+  username,
+  email,
+  createdAt
+}: ProfileProps){
+  const { user } = useAppSelector((state) => state.user);
+
+  const dateFormat = useMemo(() =>{
+    return new Date(createdAt).toLocaleDateString("en-US", {
+      month: "long",
+      day: "2-digit",
+      year: "numeric"
+    });
+  }, [createdAt]);
+
+  const activeSrc = user?.url || user?.avatar;
+
   return(
     <>
-      <Container as="section" className={profileStyles.profileContainer}>
-        <Col as="section" className={profileStyles.profileData}>
-          <h2 className={profileStyles.pageTitle}>My Account</h2>
+      <Container as="section"
+      className={profileStyles.profileContainer}>
+        <Row as="section">
+          <Col as="section" className={profileStyles.profileData}>
+            <figure>
+              <Image
+              key={activeSrc}
+              src={activeSrc}
+              alt={`${user?.name}`}
+              className={profileStyles.profileImage}/>
+            </figure>
 
-          <Col as="section" className={`${profileStyles.data} mb-2`}>
-            <span className="font-bold">
-              Username:
-            </span>
-            <span>
-              {username}
-            </span>
-          </Col>
-          <Col as="section" className={profileStyles.data}>
-            <span className="font-bold">
-              Email Address:
-            </span>
-            <span>
-              {email}
-            </span>
-          </Col>
-        </Col>
-      </Container>
+            <Col as="section" className={profileStyles.data}>
+              <h4>Username</h4>
+              <p>{username}</p>
 
-      <Container as="section" className={profileStyles.profileContainer}>
-        <Col as="section" className={`${profileStyles.data} mb-2`}>
-          <Button variant="danger" className="mt-5">Delete Account</Button>
-        </Col>
+              <h4>Email Address</h4>
+              <p>{email}</p>
+
+              <h4>Joined</h4>
+              <p>{dateFormat}</p>
+            </Col>
+          </Col>
+        </Row>
       </Container>
     </>
   )
