@@ -1,8 +1,7 @@
-export interface SidebarPageProps{
+import { IconType } from "react-icons";
+
+export interface SidebarPagesProps{
   name: string;
   url: string;
-}
-
-export interface SidebarProps{
-  menuItems: SidebarPageProps[];
+  icon: IconType;
 }
