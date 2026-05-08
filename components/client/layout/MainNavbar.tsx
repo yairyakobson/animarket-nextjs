@@ -8,16 +8,23 @@ import navbarStyles from "../styles/navbar.module.scss";
 function MainNavbar(){
   const pathname = usePathname();
 
+  const hiddenPaths = pathname.includes("/email/verify")
+  || pathname.includes("/reset-password");
+
   return(
     <>
-      <Navbar bg="primary" className={navbarStyles.navbarSpace}
-      hidden={pathname.includes("/email/verify") || pathname.includes("/reset-password")}>
+      <Navbar expand="sm" bg="black"
+      className={navbarStyles.navbarSpace}
+      hidden={hiddenPaths}>
         <Container as="section" fluid>
-          <Navbar.Brand href="/">Animarket</Navbar.Brand>
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Brand href="/"
+          className="text-white">Animarket</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav"
+          className="border border-white bg-white"/>
+          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="/signup">Sign Up</Nav.Link>
-              <Nav.Link href="/signin">Sign In</Nav.Link>
+              <Nav.Link href="/signup" className="text-white">Sign Up</Nav.Link>
+              <Nav.Link href="/signin" className="text-white">Sign In</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
