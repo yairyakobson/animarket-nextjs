@@ -1,39 +1,55 @@
 "use client"
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
-import { ListGroup } from "react-bootstrap";
+import Link from "next/link";
+import React from "react";
 
-import { SidebarProps } from "../clientInterfaces/sidebarInterface";
+import { FiSettings, FiUser } from "react-icons/fi";
 
-const SidebarConfig: React.FC<SidebarProps> = ({ menuItems }) =>{
+import { useAppSelector } from "../hooks/useAppSelector";
+import { SidebarPagesProps } from "../clientInterfaces/sidebarInterface";
+
+import sidebarStyles from "../styles/sidebar.module.scss";
+
+export default function SidebarConfig(){
   const pathName = usePathname();
-  const menuRef = useRef(pathName);
 
-  const handleMenuItemClick = (menuItemUrl: string) =>{
-    menuRef.current = menuItemUrl
-  };
+  const { user } = useAppSelector((state) => state.user);
+
+  const menuItems: SidebarPagesProps[] = [
+    { name: "Profile", url: `/profile/${user?.name}`, icon: FiUser },
+    { name: "Settings", url: "/profile/settings", icon: FiSettings }
+  ];
 
   return(
     <>
-      <ListGroup as="section">
+      <section className="container">
         {menuItems?.map((menuItem, index) =>{
-          const isActive = menuRef.current.includes(menuItem.url);
+          const isActive = pathName === menuItem.url;
+          const Icon = menuItem.icon;
 
           return(
-            <Link key={index} href={menuItem.url}
-            className={`!flex list-group-item list-group-item-action
-              ${isActive ? "active" : ""}`}
-            onClick={() => handleMenuItemClick(menuItem.url)}
-            aria-current={menuRef.current.includes(menuItem.url) ? "true" : "false"}>
-              {menuItem.name}
-            </Link>
+            <React.Fragment key={index}>
+              <Link key={index} href={menuItem.url}
+              className={`${sidebarStyles.sidebarLink}
+                ${isActive ? "font-semibold" : ""}`}>
+                <Icon className={sidebarStyles.sidebarIcon}
+                aria-disabled={true}/>
+                <section className={sidebarStyles.sidebarContentContainer}>
+                  <span className={sidebarStyles.sidebarContent}>
+                    {menuItem.name}
+                  </span>
+
+                  <span className={sidebarStyles.sidebarGhostContent}
+                  aria-hidden="true">
+                    {menuItem.name}
+                  </span>
+                </section>
+              </Link>
+            </React.Fragment>
           )
         })}
-      </ListGroup>
+      </section>
     </>
   );
 };
-
-export default SidebarConfig;
