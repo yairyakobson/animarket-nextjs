@@ -14,7 +14,7 @@
   max-width: 33.75rem !important;
   padding-block: 1rem;
   padding-inline: 1.5rem;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1);
 }
 
 .formsContainer h2{
@@ -24,18 +24,15 @@
   margin-top: 0.5rem;
 }
 
-.btn-close{
-  display: none !important;
-}
-
-.offcanvas-header{
-  display: flex !important;
-  padding: 1rem 0 0 1rem !important;
-}
-
 @media(prefers-color-scheme: dark){
   :root{
     background-color: var(--dark-color) !important;
     color: var(--light-color) !important;
+  }
+}
+
+@media screen and (width <= 1024px){
+  .drawer-side{
+    display: none;
   }
 }
