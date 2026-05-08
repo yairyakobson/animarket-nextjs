@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import {
   Alert,
   Button,
-  Container,
   FloatingLabel,
   Form
 } from "react-bootstrap";
@@ -52,8 +51,8 @@ const ChangePasswordForm: React.FC<ChangePasswordProps> = ({
 
   return(
     <>
-      <Container as={"section"}
-      className={changePasswordStyles.changePasswordContainer}>
+      <section
+      className={`${changePasswordStyles.changePasswordContainer} ${changePasswordStyles.narrow}`}>
         <Form onSubmit={changePasswordHandler}
         className={changePasswordStyles.changePasswordForm}>
           <h5>Change Password</h5>
@@ -80,10 +79,10 @@ const ChangePasswordForm: React.FC<ChangePasswordProps> = ({
             </FloatingLabel>
           </section>
 
-          <Button type="submit"
+          <Button type="submit" variant="danger"
           disabled={isLoading}>Change Password</Button>
         </Form>
-      </Container>
+      </section>
     </>
   );
 }

@@ -1,5 +1,6 @@
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import { Button, Container, Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { IoMdAdd, IoMdTrash } from "react-icons/io";
 import { toast } from "sonner";
 
@@ -17,6 +18,7 @@ const UploadProfileImageForm = ({
 }: UploadImageFunctions) =>{
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const router = useRouter();
   const { user } = useAppSelector((state) => state.user);
   const resolvedUser = user ?? initialUser;
 
@@ -50,6 +52,7 @@ const UploadProfileImageForm = ({
       toast.success("Image updated successfully", {
         duration: 2000
       });
+      router.push(`/profile/${user?.name}`);
     }
     catch(e){
       toast.error("Update failed", {
@@ -60,7 +63,8 @@ const UploadProfileImageForm = ({
 
   return(
     <>
-      <Container as="section" className={uploadImageStyles.uploadImageContainer}>
+      <section
+      className={`${uploadImageStyles.uploadImageContainer} ${uploadImageStyles.narrow}`}>
         <h5>Upload Image</h5>
         <input
         type="file"
@@ -84,12 +88,12 @@ const UploadProfileImageForm = ({
           )}
         </section>
 
-        <Button type="button"
+        <Button type="button" variant="danger"
         disabled={isProcessing}
         onClick={handleImageAction}>
           {isProcessing ? "Processing..." : "Save Changes"}
         </Button>
-      </Container>
+      </section>
     </>
   );
 }
