@@ -1,39 +1,37 @@
-$profile-data-container: #FFCACA;
+$profile-data-container: #ffffff;
 
 .profileContainer{
   display: flex;
   justify-content: center;
+  padding: 2rem;
 
   .profileData{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+    gap: 2rem;
     background-color: $profile-data-container;
-    width: 100%;
-    max-width: 28rem;
-    border-radius: 0.5rem;
     padding-block: 1rem;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+    padding-inline: 1.5rem;
+    box-shadow: 0 2px 8px 2px rgba(0, 0, 0, 0.1);
 
-    h2{
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
+    .profileImage{
+      display: block;
+      width: 10rem;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      object-fit: cover;
     }
-  }
 
-  .data{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.25rem;
+    .data{
+      display: flex;
+      flex-direction: column;
+      text-align: left;
 
-    span{
-      font-size: 1.1rem;
+      p{
+        padding: 0 !important;
+      }
     }
-  }
-}
-
-@media screen and (max-width: 991px){
-  .profileData{
-    margin-top: 1rem;
   }
 }
