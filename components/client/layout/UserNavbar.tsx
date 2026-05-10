@@ -2,12 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Container, Navbar } from "react-bootstrap";
+import { Container, Image, Navbar } from "react-bootstrap";
 
 import MobileNavbar from "./Navbar/MobileNavbat";
 import DesktopNavbar from "./Navbar/DesktopNavbar";
 
 import navbarStyles from "../styles/navbar.module.scss";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 function UserNavbar(){
   const pathname = usePathname();
@@ -22,14 +23,23 @@ function UserNavbar(){
 
   return(
     <>
-      <Navbar expand="md" bg="black"
+      <Navbar expand="md"
       className={navbarStyles.navbarSpace}
       hidden={hiddenPaths}>
         <Container as="section" fluid>
-          <Navbar.Brand href="/"
-          className="text-white">Animarket</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <picture className={navbarStyles.logoWrapper}>
+              <source media="(width < 576px)" srcSet="/icon.webp"/>
+              <Image src="/logo.webp"
+              alt="Animarket Logo"
+              className={navbarStyles.logo}/>
+            </picture>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md"
-          className="border border-white bg-white"/>
+          className={navbarStyles.customToggler}>
+            <RxHamburgerMenu color="white"
+            size="2rem"/>
+          </Navbar.Toggle>
             <MobileNavbar/>
             <DesktopNavbar/>
         </Container>
