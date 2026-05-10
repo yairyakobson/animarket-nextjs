@@ -1,4 +1,5 @@
 .navbarSpace{
+  background-color: #102529;
   min-height: 4rem;
   padding: 1rem !important;
 }
@@ -15,13 +16,32 @@
   border-radius: 50%;
 }
 
+.logoWrapper{
+  display: flex;
+}
+
+.logo{
+  width: auto;
+  height: 4rem;
+}
+
 :global(.dropdown-toggle)::after{
   display: none !important;
 }
 
-@media screen and (width <= 640px){
+.customToggler{
+  padding: 0.5rem !important;
+  color: transparent !important;
+}
+
+@media screen and (width < 576px){
   .profileImage{
     width: 3rem;
     height: 3rem;
+  }
+
+  .logo{
+    width: auto;
+    height: 4rem;
   }
 }
