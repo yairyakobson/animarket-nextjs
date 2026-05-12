@@ -10,11 +10,11 @@ import { PLACEHOLDER_URL } from "@/components/server/constants/env-keys";
 
 import { zodRegisterSchema } from "@/components/server/schemas/zod/zod-auth/ZodRegister";
 import { insertUser, registerUser } from "@/components/server/dataAccess/users";
+import { userVerificationEmail } from "@/components/server/utils/email/verificationEmail";
+import { hashValue } from "@/components/server/utils/bcrypt/hashValue";
 
 import AppError from "@/components/server/utils/appError";
 import errorHandler from "@/components/server/middleware/errorHandler";
-import { userVerificationEmail } from "@/components/server/utils/email/verificationEmail";
-import { hashValue } from "@/components/server/utils/bcrypt/hashValue";
 
 export async function POST(req: NextRequest){
   try{
