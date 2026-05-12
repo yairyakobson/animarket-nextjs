@@ -4,7 +4,7 @@ import { Button, Image } from "react-bootstrap";
 import { IoMdAdd, IoMdTrash } from "react-icons/io";
 import { toast } from "sonner";
 
-import { UploadImageFunctions } from "../clientInterfaces/pages/uploadImageProps";
+import { UploadImageFunctions } from "../clientInterfaces/pages/uploadImageFunctions";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useOptimisticUpdate } from "../hooks/useOptimisticUpdate";
 

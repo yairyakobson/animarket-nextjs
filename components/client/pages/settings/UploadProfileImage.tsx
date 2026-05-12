@@ -4,11 +4,11 @@ import { useRef } from "react";
 
 import { imageActionHandler } from "@/components/server/utils/imageAction";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { UploadImageFunctions } from "../../clientInterfaces/pages/uploadImageProps";
+import { UploadImageProps } from "../../clientInterfaces/pages/uploadImageProps";
 
 import UploadProfileImageForm from "../../forms/uploadProfileImageForm";
 
-const UploadProfileImage = ({ initialUser }: UploadImageFunctions) =>{
+const UploadProfileImage = ({ initialUser }: UploadImageProps) =>{
   const selectedFileRef = useRef<{
     public_id: string;
     image: File | null;
