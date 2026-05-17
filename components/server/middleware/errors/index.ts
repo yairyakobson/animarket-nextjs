@@ -1,9 +1,9 @@
-import { duplicateError } from "./duplicateError";
+import { duplicateSQLError } from "./duplicateSQLError";
 import { expiredJwtError } from "./expiredJwtError";
 import { invalidJwtError } from "./invalidJwtError";
 
 export const knownErrorHandlers = [
-  duplicateError,
+  duplicateSQLError,
   invalidJwtError,
   expiredJwtError
 ];
