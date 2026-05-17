@@ -1,7 +1,7 @@
 import { and, asc, desc, eq, gte, ilike, lte, or, sql, SQL } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
-import { NewProduct, products } from "@/drizzle-utils/schemas";
+import { NewProduct, products, users } from "@/drizzle-utils/schemas";
 import { ProductFilterInput } from "../schemas/zod/zod-product/ZodProductFilter";
 
 import productQueries from "../useCases/productQueries";
@@ -50,6 +50,17 @@ export const fetchAllProducts = async() =>{
   .from(products)
   
   return entireFetchingResult;
+}
+
+export const fetchUserProducts = async(sellerName: string) =>{
+  const userFetchingResult = await db
+  .select()
+  .from(products)
+  .where(
+    eq(products.seller, sellerName)
+  )
+  
+  return userFetchingResult;
 }
 
 export const filterProducts = async(filters: ProductFilterInput) =>{
