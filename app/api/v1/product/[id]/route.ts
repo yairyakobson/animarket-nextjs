@@ -13,7 +13,7 @@ export async function GET(
 
   if(!product){
     return NextResponse.json({
-      error: "No such products exist" },
+      error: "Product not found" },
       { status: NOT_FOUND }
     );
   };
