@@ -1,12 +1,12 @@
-import { and, asc, desc, eq, gte, ilike, lte, or, sql, SQL } from "drizzle-orm";
+import { and, asc, desc, eq, or } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
-import { NewProduct, products, users } from "@/drizzle-utils/schemas";
+import { NewProduct, products } from "@/drizzle-utils/schemas";
 import { ProductFilterInput } from "../schemas/zod/zod-product/ZodProductFilter";
 
 import productQueries from "../useCases/productQueries";
 
-export const createNewProduct = async(name: string, seller: string) =>{
+export const createNewProduct = async({ name }: { name: string }, seller: string) =>{
   const [newProductResult] = await db
   .select()
   .from(products)
@@ -30,6 +30,20 @@ export const insertNewProduct = async(query: NewProduct) =>{
   .returning();
 
   return insertResult;
+}
+
+export const duplicatorFinder = async(name: string) =>{
+  const [duplicatorFinderResult] = await db
+  .select()
+  .from(products)
+  .where(
+    or(
+      eq(products.name, name)
+    )
+  )
+  .limit(1);
+
+  return duplicatorFinderResult;
 }
 
 export const fetchSingleProduct = async(query: string) =>{
