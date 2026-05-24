@@ -4,7 +4,8 @@ import { useRef } from "react";
 import { Provider } from "react-redux";
 
 import { store } from "@/components/client/redux/store";
-import { UserProviderProps } from "@/components/client/clientInterfaces/userProviderInterface";
+import { UserProviderProps } from "@/components/client/clientInterfaces/userStateInterfaces/userProviderProps";
+
 import {
   setIsAuthenticated,
   setIsLoading,

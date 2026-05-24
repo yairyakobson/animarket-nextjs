@@ -7,7 +7,7 @@ import {
   setIsLoading,
   setUser
 } from "../features/userSlice";
-import { UserQueryData } from '../../clientInterfaces/userQueryInterface';
+import { UserQueryData } from '../../clientInterfaces/userStateInterfaces/userQueryData';
 
 export const userAPI = createApi({
   reducerPath: "userAPI",

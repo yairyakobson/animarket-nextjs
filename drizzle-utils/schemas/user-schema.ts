@@ -23,7 +23,7 @@ export const users = pgTable("users", {
   resetPasswordToken: text("reset_password_token"),
   resetPasswordExpire: timestamp("reset_password_expire"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
 export type User = InferSelectModel<typeof users>;
