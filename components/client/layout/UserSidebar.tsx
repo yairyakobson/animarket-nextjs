@@ -8,7 +8,7 @@ export default async function UserSidebar(
       <section>
         <section className="drawer drawer-open">
           <section className="drawer-toggle"/>
-          <section className="drawer-content mt-[1.5rem] py-[1rem]">
+          <section className="drawer-content p-4">
             <section>{children}</section>
           </section>
 
