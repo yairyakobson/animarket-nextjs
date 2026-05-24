@@ -1,0 +1,28 @@
+.card-title{
+  display: flex;
+  gap: 0.8rem !important;
+  border-color: black !important;
+  border-width: 1rem !important;
+}
+
+:global(.badge){
+  display: flex !important;
+  color: black !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding-inline: 0.6rem !important;
+  text-align: center !important;
+  border-color: black !important;
+  border-width: 0.1rem !important;
+  border-radius: 0.5rem !important;
+}
+
+.priceBadge{
+  display: flex;
+  font-weight: 500;
+  border-color: black;
+  border-width: 0.1rem;
+  border-radius: 0.5rem;
+  padding-block: 0.25rem;
+  padding-inline: 0.35rem;
+}

@@ -1,0 +1,56 @@
+.productImage{
+  margin-top: 6rem;
+}
+
+.productDetails{
+  margin-top: 7rem;
+
+  .productPrice{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.stockCounter input[type="number"]{
+  width: 3rem;
+  text-align: center !important;
+  padding: 0 !important;
+  border-radius: 0;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+
+  &:focus,
+  &:hover{
+    box-shadow: none !important;
+    border-color: gray !important;
+  }
+}
+
+.conditionStatus{
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0.3rem;
+}
+
+.stockStatus{
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 0.3rem;
+}
+
+.product-form{
+  padding: 0 2rem;
+}
+
+@media only screen and (min-width: 48em) and (max-width: 64em){
+  .productDetails{
+    margin-top: 5rem;
+  }
+  .productImage{
+    margin-top: 3rem;
+  }
+}
