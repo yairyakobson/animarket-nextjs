@@ -5,6 +5,7 @@ import {
   text,
   integer,
   uniqueIndex,
+  decimal,
 } from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { customAlphabet } from "nanoid";
@@ -17,15 +18,18 @@ export const products = pgTable("products", {
   id: varchar("id", { length: 12 }).primaryKey().$defaultFn(() => nanoid()),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description").notNull(),
-  price: integer("price").default(0).notNull(),
+  price: decimal("price", { precision: 10, scale: 2 }).default("1.00").notNull(),
+  stock: integer("stock").default(1).notNull(),
   category: text("category").notNull(),
-  condition: text("condition").default("New").notNull(),
-  stock: integer("stock").default(0).notNull(),
+  condition: text("condition").notNull(),
   seller: text("seller")
       .references(() => users.name),
+  public_id: text("public_id"),
+  url: text("url"),
+  signed_url: text("signed_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  totalReviews: integer("total_reviews").default(0),
-  averageRating: integer("average_rating").default(0),
+  totalReviews: text("total_reviews").default("0"),
+  averageRating: text("average_rating").default("0")
 }, (table) =>[
   uniqueIndex("seller_index").on(table.name, table.seller)
 ]);
