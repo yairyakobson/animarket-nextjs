@@ -5,9 +5,10 @@ import Link from "next/link";
 import React from "react";
 
 import { FiSettings, FiUser } from "react-icons/fi";
+import { FaProductHunt } from "react-icons/fa";
 
 import { useAppSelector } from "../hooks/useAppSelector";
-import { SidebarPagesProps } from "../clientInterfaces/sidebarInterface";
+import { SidebarPagesProps } from "../clientInterfaces/sidebarProps";
 
 import sidebarStyles from "../styles/sidebar.module.scss";
 
@@ -18,7 +19,8 @@ export default function SidebarConfig(){
 
   const menuItems: SidebarPagesProps[] = [
     { name: "Profile", url: `/profile/${user?.name}`, icon: FiUser },
-    { name: "Settings", url: "/profile/settings", icon: FiSettings }
+    { name: "Settings", url: "/profile/settings", icon: FiSettings },
+    { name: "My Products", url: "/profile/my_products", icon: FaProductHunt }
   ];
 
   return(

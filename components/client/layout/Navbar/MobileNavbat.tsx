@@ -62,6 +62,10 @@ function MobileNavbar(){
             <Nav.Link href="/profile/settings">
               Settings
             </Nav.Link>
+
+            <Nav.Link href="/profile/my_products">
+              My Products
+            </Nav.Link>
       
             <Button variant="danger" onClick={handleLogout}>
               Logout

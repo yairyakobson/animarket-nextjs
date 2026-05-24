@@ -70,6 +70,12 @@ function DesktopNavbar(){
             Settings
           </Dropdown.Item>
 
+          <Dropdown.Item as={Link}
+          href="/profile/settings"
+          className="active:!bg-transparent text-black">
+            My Products
+          </Dropdown.Item>
+
           <Dropdown.Item onClick={handleLogout}
           className="active:!bg-transparent text-danger !font-semibold">
             Logout
