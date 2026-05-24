@@ -2,8 +2,8 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { UserQueryData } from "../../clientInterfaces/userQueryInterface";
-import type { UserStateData } from "../../clientInterfaces/userStateData";
+import type { UserQueryData } from "../../clientInterfaces/userStateInterfaces/userQueryData";
+import type { UserStateData } from "../../clientInterfaces/userStateInterfaces/userStateData";
 
 const initialState: UserStateData = {
   user: null,

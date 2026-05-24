@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { toast } from "sonner";
 
-import { SigninProps } from "../clientInterfaces/signinInterface";
+import { SigninProps } from "../clientInterfaces/formInterfaces/signinProps";
 import { useSigninUserMutation } from "../redux/services/authApi";
 import { useAppSelector } from "../hooks/useAppSelector";
 

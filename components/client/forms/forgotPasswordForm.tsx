@@ -7,7 +7,7 @@ import {
 } from "react-bootstrap";
 import { RxCheckCircled, RxCrossCircled } from "react-icons/rx";
 
-import { ForgotPasswordProps } from "../clientInterfaces/forgotPasswordInterface";
+import { ForgotPasswordProps } from "../clientInterfaces/formInterfaces/forgotPasswordInterface";
 import { useForgotPasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";

@@ -11,7 +11,7 @@ import {
 import { RxCrossCircled } from "react-icons/rx";
 import { toast } from "sonner";
 
-import { ResetPasswordProps } from "../clientInterfaces/resetPasswordInterface";
+import { ResetPasswordProps } from "../clientInterfaces/formInterfaces/resetPasswordProps";
 import { useResetPasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";

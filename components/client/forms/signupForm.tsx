@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { RxCheckCircled, RxCrossCircled } from "react-icons/rx";
 
-import { SignupProps } from "../clientInterfaces/signupInterface";
+import { SignupProps } from "../clientInterfaces/formInterfaces/signupProps";
 import { useSignupUserMutation } from "../redux/services/authApi";
 
 import errorMessage from "../errors/error";

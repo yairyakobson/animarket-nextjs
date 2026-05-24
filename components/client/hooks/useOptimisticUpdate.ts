@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { ActionResponse } from "../clientInterfaces/actionInterface";
+import { ActionResponse } from "../clientInterfaces/actionProps";
 
 import { setUser } from "../redux/features/userSlice";
-import { UserQueryData } from "../clientInterfaces/userQueryInterface";
+import { UserQueryData } from "../clientInterfaces/userStateInterfaces/userQueryData";
 
 export const useOptimisticUpdate = (
   resolvedUser: any,

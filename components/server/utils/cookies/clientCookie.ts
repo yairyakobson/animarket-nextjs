@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 
 import { JWT_SECRET } from "../../constants/env-keys";
 
-import { UserQueryData } from "@/components/client/clientInterfaces/userQueryInterface";
+import { UserQueryData } from "@/components/client/clientInterfaces/userStateInterfaces/userQueryData";
 import { verifyToken } from "../tokens/verifyToken";
 import { JWTPayload } from "../../serverInterfaces/jwtPayloadInterface";
 

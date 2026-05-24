@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 
 import { useAppSelector } from "../hooks/useAppSelector";
-import { ProfileProps } from "../clientInterfaces/pages/profileProps";
+import { ProfileProps } from "../clientInterfaces/pageInterfaces/profileProps";
 
 import profileStyles from "../styles/profile.module.scss";
 

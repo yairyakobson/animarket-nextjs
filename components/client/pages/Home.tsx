@@ -2,7 +2,7 @@
 
 import { Button } from "react-bootstrap";
 
-import { HomeProps } from "../clientInterfaces/pages/homepageProps";
+import { HomeProps } from "../clientInterfaces/pageInterfaces/homepageProps";
 
 export default function Home({ username }: HomeProps){
   return(

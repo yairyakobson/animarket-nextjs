@@ -10,7 +10,7 @@ import {
 import { toast } from "sonner";
 
 import { useAppSelector } from "../hooks/useAppSelector";
-import { ChangePasswordProps } from "../clientInterfaces/pages/changePasswordProps";
+import { ChangePasswordProps } from "../clientInterfaces/formInterfaces/changePasswordProps";
 import { useUpdatePasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";
