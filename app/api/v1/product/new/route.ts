@@ -18,6 +18,14 @@ export async function POST(req: NextRequest){
     }
 
     const body = await req.json();
+    const rawImage = body.image;
+
+    if(!rawImage){
+      return NextResponse.json({
+        error: "Product image is required"
+      }, { status: BAD_REQUEST });
+    }
+
     const parsed = zodProductDataSchema.safeParse(body);
   
     if(!parsed.success){
@@ -28,20 +36,23 @@ export async function POST(req: NextRequest){
 
     const {
       name,
-      seller
+      seller,
     } = parsed.data;
 
-    const existing = await createNewProduct(name, seller as string);
+    const existing = await createNewProduct({ name }, seller);
     
     if(existing){
       return NextResponse.json({
-        error: "Product already exists" },
-      { status: CONFLICT });
-    }
+        error: "You can't create a product with the same name"
+      }, { status: CONFLICT });
+    };
     
     const newProduct = await insertNewProduct({
       ...parsed.data,
-      seller: user?.name as string
+      price: String(parsed.data.price),
+      public_id: rawImage.public_id ?? null,
+      url: rawImage.url ?? null,
+      signed_url: rawImage.signed_url ?? null
     });
 
     return NextResponse.json({
