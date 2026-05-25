@@ -77,7 +77,7 @@ $button-text: #FFFFFF;
   }
 }
 
-@media screen and (width <= 640px){
+@media screen and (width <= 40rem){
   .uploadImageContainer{
     &.narrow{
       --content-vidth: 20rem;
@@ -89,7 +89,7 @@ $button-text: #FFFFFF;
   }
 }
 
-@media screen and (width > 640px){
+@media screen and (width > 40rem){
   .uploadImageContainer{
     &.narrow{
       --content-vidth: 30rem;

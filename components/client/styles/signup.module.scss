@@ -33,7 +33,7 @@ $button-text-color: #FFFFFF;
   }
 }
 
-@media screen and (width <= 640px){
+@media screen and (width <= 40rem){
   .signupForm{
     margin: 0 auto;
     width: 100%;
@@ -41,7 +41,7 @@ $button-text-color: #FFFFFF;
   }
 }
 
-@media screen and (width > 640px){
+@media screen and (width > 40rem){
   .signupForm{
     margin: 0 auto;
     width: 100%;
