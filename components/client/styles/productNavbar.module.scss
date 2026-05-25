@@ -1,0 +1,27 @@
+.navbarContainer{
+  margin: 0 auto 0 auto;
+  max-width: 77.813rem;
+
+  .navbarComponent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+  }
+}
+
+.productFilters{
+  background-color: transparent;
+  border-width: 0.063rem;
+  padding: 0.25rem;
+  margin: 0 0.5rem 0 0.5rem;
+  font-weight: 500;
+  width: fit-content;
+
+  &:focus{
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
