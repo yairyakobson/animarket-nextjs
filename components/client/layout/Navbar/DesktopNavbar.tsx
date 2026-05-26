@@ -71,7 +71,7 @@ function DesktopNavbar(){
           </Dropdown.Item>
 
           <Dropdown.Item as={Link}
-          href="/profile/settings"
+          href="/profile/my_products"
           className="active:!bg-transparent text-black">
             My Products
           </Dropdown.Item>

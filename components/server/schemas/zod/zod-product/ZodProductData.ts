@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 
 import { zodSellerSchema } from "./ZodSeller";
 import { zodProductImageSchema } from "./ZodProductImage";
@@ -10,8 +10,8 @@ export const zodProductDataSchema = z.object({
   stock: z.coerce.number().nonnegative(),
   category: z.string(),
   condition: z.string(),
-  totalReviews: z.string().default("0"),
-  averageRating: z.string().default("0")
+  totalReviews: z.number().int().default(0),
+  averageRating: z.number().default(0.0),
 })
 .extend({
   seller: zodSellerSchema,
