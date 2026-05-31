@@ -1,11 +1,12 @@
 import { 
   pgTable,
-  varchar,
-  timestamp,
-  text,
-  integer,
-  uniqueIndex,
   decimal,
+  integer,
+  real,
+  text,
+  timestamp,
+  uniqueIndex,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { customAlphabet } from "nanoid";
@@ -27,9 +28,9 @@ export const products = pgTable("products", {
   public_id: text("public_id"),
   url: text("url"),
   signed_url: text("signed_url"),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  totalReviews: text("total_reviews").default("0"),
-  averageRating: text("average_rating").default("0")
+  totalReviews: integer("total_reviews").default(0),
+  averageRating: real("average_rating").default(0.0),
+  createdAt: timestamp("created_at").defaultNow().notNull()
 }, (table) =>[
   uniqueIndex("seller_index").on(table.name, table.seller)
 ]);

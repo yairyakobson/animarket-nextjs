@@ -1,10 +1,10 @@
 import { 
-  pgTable, 
-  uuid, 
-  text, 
-  varchar, 
-  boolean, 
-  timestamp 
+  pgTable,
+  boolean,
+  text,
+  timestamp,
+  uuid,
+  varchar
 } from "drizzle-orm/pg-core";
 import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
