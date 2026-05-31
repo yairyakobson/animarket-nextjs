@@ -1,7 +1,7 @@
-import { and, asc, desc, eq, or } from "drizzle-orm";
+import { and, asc, desc, eq, or, sql } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
-import { NewProduct, products } from "@/drizzle-utils/schemas";
+import { NewProduct, products, reviews } from "@/drizzle-utils/schemas";
 import { ProductFilterInput } from "../schemas/zod/zod-product/ZodProductFilter";
 
 import productQueries from "../useCases/productQueries";
@@ -59,11 +59,20 @@ export const fetchSingleProduct = async(query: string) =>{
 }
 
 export const fetchAllProducts = async() =>{
-  const entireFetchingResult = await db
-  .select()
+  const productData = await db
+  .select({
+    id: products.id,
+    name: products.name,
+    price: products.price,
+    seller: products.seller,
+    totalReviews: sql<number>`count(${reviews.productId})::int`,
+    averageRating: sql<number>`coalesce(round(avg(${reviews.rating})::numeric, 1), 0)::float`
+  })
   .from(products)
-  
-  return entireFetchingResult;
+  .leftJoin(reviews, eq(products.id, reviews.productId))
+  .groupBy(products.id);
+
+  return productData;
 }
 
 export const fetchUserProducts = async(sellerName: string) =>{
