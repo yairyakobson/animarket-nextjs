@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Col, Container, Image } from "react-bootstrap";
 
 import { SORTING_STRATEGIES } from "../../constants/productConstants";
 import { UserProductsMapping } from "../../clientInterfaces/userProductsMapping";
@@ -10,6 +10,7 @@ import { UserProductsMapping } from "../../clientInterfaces/userProductsMapping"
 import UserProductsNavbar from "../../layout/UserProductsNavbar";
 
 import userProductsStyles from "../../styles/userProducts.module.scss";
+import { Rating } from "react-simple-star-rating";
 
 const UserProducts = ({ userProducts }: UserProductsMapping) =>{
   const [sortBy, setSortBy] = useState<string>("Name (A-Z)");
@@ -37,8 +38,9 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
           md:w-[20rem]">
             <figure>
               <Image
-              src={product?.url || "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}
-              alt={product.name}/>
+              src={product?.url || "/placeholder.webp"}
+              alt={product?.name}
+              className="!max-w-full"/>
             </figure>
             <section className="card-body">
               <h5 className="card-title gap-2">
@@ -48,6 +50,17 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
               </h5>
               <p>{product.description}</p>
               <section className="card-actions justify-end">
+                <Rating
+                iconsCount={5}
+                initialValue={product?.averageRating as number}
+                allowFraction={true}
+                fillColor="#FFA41C"
+                size={22}
+                readonly
+                SVGclassName="inline-block"/>
+                <Col as="section" className="mt-[0.1rem]">
+                  ({product.averageRating})
+                </Col>
                 <section
                 className={`${userProductsStyles.priceBadge} badge-outline`}>
                   {"$" + product.price}
