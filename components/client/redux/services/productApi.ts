@@ -5,7 +5,7 @@ export const productAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/v1"
   }),
-  tagTypes: ["Product"],
+  tagTypes: ["Product", "Reviews"],
   endpoints: (builder) =>({
     createProduct: builder.mutation({
       query(body){
@@ -18,29 +18,13 @@ export const productAPI = createApi({
       invalidatesTags: ["Product"]
     }),
     getUserProducts: builder.query({
-      query: (params) =>({
-        url: "user/my_products",
-        params: {
-          page: params?.page,
-          keyword: params?.keyword,
-          category: params?.category,
-          "rating[gte]": params?.rating,
-          "price[gte]": params.min,
-          "price[lte]": params.max
-        }
+      query: () =>({
+        url: "user/my_products"
       })
     }),
     getFilteredProducts: builder.query({
-      query: (params) =>({
-        url: "/products/filter",
-        params: {
-          page: params?.page,
-          keyword: params?.keyword,
-          category: params?.category,
-          "rating[gte]": params?.rating,
-          "price[gte]": params.min,
-          "price[lte]": params.max
-        }
+      query: () =>({
+        url: "/products/filter"
       })
     }),
     getProductDetails: builder.query({
@@ -54,5 +38,5 @@ export const {
   useCreateProductMutation,
   useGetUserProductsQuery,
   useGetFilteredProductsQuery,
-  useGetProductDetailsQuery,
+  useGetProductDetailsQuery
 } = productAPI;
