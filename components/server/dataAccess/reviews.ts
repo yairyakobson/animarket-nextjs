@@ -46,7 +46,6 @@ export const fetchProductReviews = async(query: string) =>{
   .where(
     eq(reviews.productId, query)
   )
-  .limit(1);
   
   return reviewFetcherResult;
 }
