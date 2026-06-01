@@ -4,9 +4,9 @@ import { BAD_REQUEST, CREATED, FORBIDDEN } from "@/components/server/constants/h
 
 import { zodReviewsSchema } from "@/components/server/schemas/zod/zod-product/ZodReviews";
 import { sellerReviewSubmissionBlocker, submitNewProductReview } from "@/components/server/dataAccess/reviews";
+import { isAuthenticatedUser } from "@/components/server/utils/auth";
 
 import errorHandler from "@/components/server/middleware/errorHandler";
-import { isAuthenticatedUser } from "@/components/server/utils/auth";
 
 export async function POST(req: NextRequest){
   try{
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest){
     
     const reviewData = {
       ...parsed.data,
-      reviewer: (parsed.data as { reviewer?: string }).reviewer ?? user?.name
+      reviewer: user?.name
     };
 
     const newProductReview = await submitNewProductReview(reviewData);

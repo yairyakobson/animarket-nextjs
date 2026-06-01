@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Col, Container, Image } from "react-bootstrap";
+import { Rating } from "react-simple-star-rating";
 
-import { SORTING_STRATEGIES } from "../../constants/productConstants";
+import { SORTING_STRATEGIES } from "../../constants/product/productConstants";
 import { UserProductsMapping } from "../../clientInterfaces/userProductsMapping";
 
 import UserProductsNavbar from "../../layout/UserProductsNavbar";
 
 import userProductsStyles from "../../styles/userProducts.module.scss";
-import { Rating } from "react-simple-star-rating";
 
 const UserProducts = ({ userProducts }: UserProductsMapping) =>{
   const [sortBy, setSortBy] = useState<string>("Name (A-Z)");
