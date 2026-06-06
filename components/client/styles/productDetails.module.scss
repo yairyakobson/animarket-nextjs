@@ -46,6 +46,42 @@
   padding: 0 2rem;
 }
 
+// Force the modal container to be visible when Bootstrap adds the .show class
+:global(.modal.show){
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+// Ensure the inner dialog handles layout correctly without daisyUI interference
+:global(.modal-dialog){
+  position: relative !important;
+  width: 35rem !important;
+  margin: 1.75rem auto !important; // Standard Bootstrap centering margin
+  pointer-events: none !important;
+  
+  // Content inside the dialog should accept pointer events again
+  :global(.modal-content){
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border: none !important;
+  }
+
+  :global(.modal-header){
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  :global(.modal-title){
+    text-align: center !important;
+    font-size: 2rem !important;
+    position: relative;
+    top: -0.75rem;
+  }
+}
+
 @media only screen and (min-width: 48em) and (max-width: 64em){
   .productDetails{
     margin-top: 5rem;
