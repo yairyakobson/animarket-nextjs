@@ -8,7 +8,7 @@ import { isAuthenticatedUser } from "@/components/server/utils/auth";
 
 import errorHandler from "@/components/server/middleware/errorHandler";
 
-export async function POST(req: NextRequest){
+export async function PUT(req: NextRequest){
   try{
     const body = await req.json();
     const parsed = zodReviewsSchema.safeParse(body);
