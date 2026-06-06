@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Button, Col, Container, FloatingLabel, Form, Image, Row } from "react-bootstrap";
 import { toast } from "sonner";
 
-import { PRODUCT_CATEGORIES, PRODUCT_CONDITION } from "../constants/productConstants";
+import { PRODUCT_CATEGORIES } from "../constants/categories/productConstants";
+import { PRODUCT_CONDITION } from "../constants/condition/productConstants";
 
 import { NewProductProps } from "../clientInterfaces/formInterfaces/newProductProps";
 import { useCreateProductMutation } from "../redux/services/productApi";
