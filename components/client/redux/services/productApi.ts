@@ -17,6 +17,11 @@ export const productAPI = createApi({
       },
       invalidatesTags: ["Product"]
     }),
+    getProducts: builder.query({
+      query: () =>({
+        url: "/products"
+      })
+    }),
     getUserProducts: builder.query({
       query: () =>({
         url: "user/my_products"
@@ -36,6 +41,7 @@ export const productAPI = createApi({
 
 export const {
   useCreateProductMutation,
+  useGetProductsQuery,
   useGetUserProductsQuery,
   useGetFilteredProductsQuery,
   useGetProductDetailsQuery
