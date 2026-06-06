@@ -5,7 +5,7 @@ export const reviewAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/v1"
   }),
-  tagTypes: ["Product", "Reviews"],
+  tagTypes: ["Reviews"],
   endpoints: (builder) =>({
     submitReview: builder.mutation({
       query(body){
@@ -15,7 +15,7 @@ export const reviewAPI = createApi({
           body
         }
       },
-      invalidatesTags: ["Product"]
+      invalidatesTags: ["Reviews"]
     }),
     getProductReviews: builder.query({
       query: (productId) => `/reviews/${productId}`,
