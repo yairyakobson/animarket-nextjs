@@ -1,0 +1,3 @@
+type UsernameProps = {
+  username: string;
+}
