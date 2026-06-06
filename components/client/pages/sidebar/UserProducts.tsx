@@ -28,19 +28,19 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
     <>
       <UserProductsNavbar sortBy={sortBy} onSortChange={setSortBy}/>
       <Container className="!grid mt-3
-      !gap-4 justify-items-center
+      !gap-y-4 justify-items-center
       md:!grid-cols-2
       lg:!grid-cols-2
       xl:!grid-cols-3">
         {sortedProducts.map((product) =>(
           <section key={product.id}
-          className="card max-w-[25rem] shadow-sm
+          className="card !max-w-full shadow-sm
           md:w-[20rem]">
             <figure>
               <Image
               src={product?.url || "/placeholder.webp"}
               alt={product?.name}
-              className="!max-w-full"/>
+              className="!w-full !h-[15rem]"/>
             </figure>
             <section className="card-body">
               <h5 className="card-title gap-2">
