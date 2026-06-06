@@ -1,4 +1,4 @@
-import { eq, gte, ilike, lte, SQL } from "drizzle-orm";
+import { eq, gte, ilike, sql, SQL } from "drizzle-orm";
 import { ProductFilterInput } from "../schemas/zod/zod-product/ZodProductFilter";
 import { products } from "@/drizzle-utils/schemas";
 
@@ -14,14 +14,17 @@ export default function productQueries(filters: ProductFilterInput): SQL[]{
   if(filters.condition){
     conditions.push(eq(products.condition, filters.condition));
   }
+  if(filters.rating){
+    conditions.push(eq(products.averageRating, filters.rating));
+  }
 
   // 2. Numeric Range Filters (Cast explicitly as numeric to avoid string-matching bugs)
   if(filters.minPrice !== undefined){
-    conditions.push(lte(products.price, filters.minPrice));
+    conditions.push(sql`${products.price} >= ${filters.minPrice}`);
   }
   if(filters.maxPrice !== undefined){
-    conditions.push(gte(products.price, filters.maxPrice));
+    conditions.push(sql`${products.price} <= ${filters.maxPrice}`);
   }
-
-  return conditions
+  
+  return conditions;
 }
