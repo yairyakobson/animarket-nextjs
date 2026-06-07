@@ -1,3 +1,0 @@
-type UsernameProps = {
-  username: string;
-}
