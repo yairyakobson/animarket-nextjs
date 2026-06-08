@@ -1,5 +1,7 @@
 "use client"
 
+import { NavbarProps } from "../type/navbarType";
+
 import MainNavbar from "./MainNavbar";
 import UserNavbar from "./UserNavbar";
 
