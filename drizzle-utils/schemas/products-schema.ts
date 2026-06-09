@@ -8,7 +8,7 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel, sql } from "drizzle-orm";
 import { customAlphabet } from "nanoid";
 
 import { users } from "./user-schema";
@@ -32,7 +32,7 @@ export const products = pgTable("products", {
   averageRating: real("average_rating").default(0.0),
   createdAt: timestamp("created_at").defaultNow().notNull()
 }, (table) =>[
-  uniqueIndex("seller_index").on(table.name, table.seller)
+  uniqueIndex("seller_index").on(sql`lower(${table.name})`)
 ]);
 
 export type Products = InferSelectModel<typeof products>;

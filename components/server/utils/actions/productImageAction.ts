@@ -30,7 +30,7 @@ export async function productImageAction(
       return{ 
         success: false, 
         error: CONFLICT, 
-        message: "You can't create a product with the same name" 
+        message: "This product name is used by another user" 
       };
     }
     

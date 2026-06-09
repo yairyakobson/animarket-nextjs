@@ -37,8 +37,8 @@ export const duplicatorFinder = async(name: string) =>{
   .select()
   .from(products)
   .where(
-    or(
-      eq(products.name, name)
+    and(
+      sql`lower(${products.name}) = lower(${name})`
     )
   )
   .limit(1);
@@ -65,6 +65,8 @@ export const fetchAllProducts = async() =>{
     name: products.name,
     price: products.price,
     seller: products.seller,
+    category: products.category,
+    url: products.url,
     totalReviews: sql<number>`count(${reviews.productId})::int`,
     averageRating: sql<number>`coalesce(round(avg(${reviews.rating})::numeric, 1), 0)::float`
   })
