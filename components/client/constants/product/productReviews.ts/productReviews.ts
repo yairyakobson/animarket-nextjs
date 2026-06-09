@@ -20,7 +20,7 @@ export const REVIEW_STRATEGIES: Record<
     const ratingDiff = Number(b.rating) - Number(a.rating);
     
     if(ratingDiff !== 0){
-      return ratingDiff;
+      return Number(a.rating) - Number(b.rating);
     }
     
     return a.reviewer.localeCompare(b.reviewer);

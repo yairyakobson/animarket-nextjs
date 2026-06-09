@@ -1,3 +1,3 @@
-import { reviews } from "@/drizzle-utils/schemas";
+import { fetchProductReviews } from "@/components/server/dataAccess/reviews";
 
-export type ProductReviewProps = typeof reviews.$inferSelect
+export type ProductReviewProps =Awaited<ReturnType<typeof fetchProductReviews>>[number]

@@ -1,7 +1,7 @@
-import { desc, eq, sql } from "drizzle-orm";
+import { desc, eq, getTableColumns, sql } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
-import { NewReview, products, reviews } from "@/drizzle-utils/schemas";
+import { NewReview, products, reviews, users } from "@/drizzle-utils/schemas";
 
 export const submitNewProductReview = async(
   newReview: NewReview
@@ -41,11 +41,14 @@ export const submitNewProductReview = async(
 
 export const fetchProductReviews = async(query: string) =>{
   const reviewFetcherResult = await db
-  .select()
+  .select({
+    ...getTableColumns(reviews),
+    reviewerAvatar: users.avatar,
+    reviewerImage: users.url
+  })
   .from(reviews)
-  .where(
-    eq(reviews.productId, query)
-  )
+  .leftJoin(users, eq(reviews.reviewer, users.name))
+  .where(eq(reviews.productId, query));
   
   return reviewFetcherResult;
 }

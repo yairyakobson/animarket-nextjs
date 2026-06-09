@@ -66,7 +66,7 @@ const Reviews: React.FC<ProductReviewsMapping> = ({ productReviews }) =>{
         {sortedReviews?.map((review: ProductReviewProps) =>(
           <section key={review.id} className="py-2 px-[6rem] my-4">
             <section className="flex items-center gap-3 mb-2">
-              <Image src={user?.avatar || user?.url as string}
+              <Image src={review.reviewerAvatar || review?.reviewerImage as string}
               alt={user?.name}
               className="rounded-circle"
               width="45"
