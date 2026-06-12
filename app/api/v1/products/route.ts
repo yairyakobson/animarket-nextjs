@@ -1,20 +1,26 @@
 import { NextResponse } from "next/server";
 
-import { BAD_REQUEST, OK } from "@/components/server/constants/httpCodes";
+import { BAD_REQUEST, NOT_FOUND, OK } from "@/components/server/constants/httpCodes";
 
 import { fetchAllProducts } from "@/components/server/dataAccess/products";
 
 export async function GET(){
-  try {
+  try{
     const productsList = await fetchAllProducts();
-    return NextResponse.json(
+    if(productsList.length > 0){
+      return NextResponse.json(
       productsList,
-      { status: OK }
+      { status: OK });
+    }
+    return NextResponse.json({
+      error: `Number of products: ${productsList.length}` },
+      { status: NOT_FOUND }
     );
+    
   }
   catch(error){
     console.error("Fetching error:", error);
-
+    
     return NextResponse.json({
       error: "Failed to fetch products"
     }, { status: BAD_REQUEST });
