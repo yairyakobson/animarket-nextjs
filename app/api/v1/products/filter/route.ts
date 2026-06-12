@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { BAD_REQUEST, NOT_FOUND, OK } from "@/components/server/constants/httpCodes";
-import { zodFilterProductSchema } from "@/components/server/schemas/zod/zod-product/ZodProductFilter";
 import { filterProducts } from "@/components/server/dataAccess/products";
+import { zodFilterProductSchema } from "@/components/server/schemas/zod/zod-product/ZodProductFilter";
+
 import errorHandler from "@/components/server/middleware/errorHandler";
 
 export async function GET(req: NextRequest){
@@ -19,13 +20,12 @@ export async function GET(req: NextRequest){
     }
 
     const filteredProducts = await filterProducts(parsed.data);
-    console.log(`Number of products: ${filteredProducts.length}`)
 
     if(filteredProducts.length > 0){
       return NextResponse.json(
         { message: `Number of products: ${filteredProducts.length}`,
           filteredProducts
-         }, 
+        }, 
         { status: OK }
       );
     }

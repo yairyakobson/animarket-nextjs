@@ -11,7 +11,7 @@ export const zodProductDataSchema = z.object({
   category: z.string(),
   condition: z.string(),
   totalReviews: z.number().int().default(0),
-  averageRating: z.number().default(0.0),
+  averageRating: z.number().default(0.0)
 })
 .extend({
   seller: zodSellerSchema,

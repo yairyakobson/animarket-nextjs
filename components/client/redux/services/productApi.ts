@@ -17,9 +17,10 @@ export const productAPI = createApi({
       },
       invalidatesTags: ["Product"]
     }),
-    getProducts: builder.query({
+    getProducts: builder.mutation({
       query: () =>({
-        url: "/products"
+        url: "/products",
+        method: "GET"
       })
     }),
     getUserProducts: builder.query({
@@ -41,7 +42,7 @@ export const productAPI = createApi({
 
 export const {
   useCreateProductMutation,
-  useGetProductsQuery,
+  useGetProductsMutation,
   useGetUserProductsQuery,
   useGetFilteredProductsQuery,
   useGetProductDetailsQuery

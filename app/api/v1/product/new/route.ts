@@ -52,7 +52,7 @@ export async function POST(req: NextRequest){
       price: String(parsed.data.price),
       public_id: rawImage.public_id ?? null,
       url: rawImage.url ?? null,
-      signed_url: rawImage.signed_url ?? null
+      signed_url: rawImage.signed_url ?? null,
     });
 
     return NextResponse.json({

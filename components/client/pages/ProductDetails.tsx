@@ -72,7 +72,7 @@ export default function ProductDetails(){
               size={25}
               readonly
               SVGclassName="inline-block"/>
-              <span id="no-of-reviews" className="px-2">
+              <span id="no-of-reviews" className="px-2 relative top-[0.075rem]">
                 ({product?.totalReviews} Reviews)
               </span>
               <p className={`${productDetailsStyles.productPrice} text-2xl font-bold mt-3`}>

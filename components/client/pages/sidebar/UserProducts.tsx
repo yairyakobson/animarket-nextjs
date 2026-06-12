@@ -32,7 +32,7 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
       md:!grid-cols-2
       lg:!grid-cols-2
       xl:!grid-cols-3">
-        {sortedProducts.map((product) =>(
+        {sortedProducts?.map((product) =>(
           <section key={product.id}
           className="card !max-w-full shadow-sm
           md:w-[20rem]">
