@@ -15,7 +15,7 @@ import {
   createResetPasswordEmail
 } from "@/components/server/dataAccess/verification";
 import { resetPasswordEmailTemplate } from "@/components/server/utils/email/templates/resetPasswordTemplate";
-import { oneHourFromNow } from "@/components/server/utils/date";
+import { fifteenMinutesFromNow } from "@/components/server/utils/date";
 import { resetPasswordEmail } from "@/components/server/utils/email/resetPasswordEmail";
 
 import VerificationCodeType from "@/components/server/constants/verificationCodeType";
@@ -54,14 +54,14 @@ export async function POST(req: NextRequest){
   const resetRecord = await createResetPasswordCode({
     userId: user?.id,
     type: VerificationCodeType.PasswordReset,
-    expiresAt: oneHourFromNow()
+    expiresAt: fifteenMinutesFromNow()
   });
   const resetToken = resetRecord.id;
 
   await resetPasswordRecord({
-    userId: user.id,
+    userId: user?.id,
     resetPasswordToken: resetToken,
-    resetPasswordExpire: oneHourFromNow()
+    resetPasswordExpire: fifteenMinutesFromNow()
   });
 
   const resetUrl = `${APP_ORIGIN}/reset-password/${resetToken}`;

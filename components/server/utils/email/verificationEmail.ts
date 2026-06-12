@@ -1,7 +1,7 @@
 import { APP_ORIGIN, SMTP_FROM_EMAIL } from "../../constants/env-keys";
 import { createVerificationCode } from "../../dataAccess/verification";
 
-import { oneYearFromNow } from "../date";
+import { fifteenMinutesFromNow } from "../date";
 import { emailVerificationTemplate } from "./templates/verifyEmailTemplate";
 
 import mailingSystem from "../../useCases/mailingSystem";
@@ -11,7 +11,7 @@ export async function userVerificationEmail(newUser: string, email: string){
   const emailVerify = await createVerificationCode({
     userId: newUser,
     type: VerificationCodeType.EmailVerification,
-    expiresAt: oneYearFromNow()
+    expiresAt: fifteenMinutesFromNow()
   });
 
   const url = `${APP_ORIGIN}/email/verify/${emailVerify.userId}`;
