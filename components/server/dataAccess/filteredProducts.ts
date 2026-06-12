@@ -3,7 +3,7 @@ import { desc, eq, gte } from "drizzle-orm";
 import { db } from "@/drizzle-utils/main-config";
 import { products } from "@/drizzle-utils/schemas";
 
-export const fetchNewProducts = async(date: Date) =>{
+export const fetchLatestProducts = async(date: Date) =>{
   const newProductsResult = await db
   .select()
   .from(products)
