@@ -1,3 +1,7 @@
+import { LatestProductsProps } from "../../type/product/latestProps";
+import { TopRatedProductsProps } from "../../type/product/topRatedProps";
+
 export interface HomeProps{
-  username: string;
+  topRatedProducts: TopRatedProductsProps[];
+  latestProducts: LatestProductsProps[];
 }
