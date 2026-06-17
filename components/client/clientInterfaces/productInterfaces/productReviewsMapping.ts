@@ -1,4 +1,4 @@
-import { ProductReviewProps } from "../type/reviewsType";
+import { ProductReviewProps } from "../../type/reviewsType";
 
 export interface ProductReviewsMapping{
   productReviews: ProductReviewProps[] | null;

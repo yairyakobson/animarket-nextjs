@@ -1,4 +1,4 @@
-import { UserProductsProps } from "../type/userProductsType";
+import { UserProductsProps } from "../../type/userProductsType";
 
 export interface UserProductsMapping{
   userProducts: UserProductsProps[] | undefined;
