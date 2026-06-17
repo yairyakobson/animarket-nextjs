@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Col, Container, Image } from "react-bootstrap";
-import { Rating } from "react-simple-star-rating";
 
 import { SORTING_STRATEGIES } from "../../constants/product/productConstants";
-import { UserProductsMapping } from "../../clientInterfaces/userProductsMapping";
+
+import { ProductRating } from "../../layout/ProductRating";
+import { UserProductsMapping } from "../../clientInterfaces/productInterfaces/userProductsMapping";
 
 import UserProductsNavbar from "../../layout/UserProductsNavbar";
 
@@ -33,9 +34,9 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
       lg:!grid-cols-2
       xl:!grid-cols-3">
         {sortedProducts?.map((product) =>(
-          <section key={product.id}
+          <section key={product?.id}
           className="card !max-w-full shadow-sm
-          md:w-[20rem]">
+          md:flex w-[20rem]">
             <figure>
               <Image
               src={product?.url || "/placeholder.webp"}
@@ -44,26 +45,22 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
             </figure>
             <section className="card-body">
               <h5 className="card-title gap-2">
-                <Link href={`/product/${product.id}`}
-                className="text-decoration-none text-black">{product.name}</Link>
-                <section className="badge badge-outline text-black">{product.category}</section>
+                <Link href={`/product/${product?.id}`}
+                className="text-decoration-none text-black">{product?.name}</Link>
+                <section className="badge badge-outline text-black">{product?.category}</section>
               </h5>
               <p>{product.description}</p>
               <section className="card-actions justify-end">
-                <Rating
-                iconsCount={5}
-                initialValue={product?.averageRating as number}
-                allowFraction={true}
-                fillColor="#FFA41C"
-                size={22}
-                readonly
-                SVGclassName="inline-block"/>
-                <Col as="section" className="mt-[0.1rem]">
-                  ({product.averageRating})
+                <ProductRating
+                rating={product?.averageRating}
+                className="1.5rem"
+                isReadOnly={true}/>
+                <Col as="section" className="leading-none transform translate-y-[5px]">
+                  ({product?.averageRating})
                 </Col>
                 <section
                 className={`${userProductsStyles.priceBadge} badge-outline`}>
-                  {"$" + product.price}
+                  {"$" + product?.price}
                 </section>
               </section>
             </section>
