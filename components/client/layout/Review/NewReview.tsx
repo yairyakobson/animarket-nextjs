@@ -3,8 +3,9 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { Rating } from "react-simple-star-rating";
+import { StarRating } from "react-flexible-star-rating";
 import { toast } from "sonner";
+
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useGetProductDetailsQuery } from "../../redux/services/productApi";
 import { useSubmitReviewMutation, useGetProductReviewsQuery } from "../../redux/services/reviewApi";
@@ -61,15 +62,15 @@ const NewReview = () =>{
 
     if(isSuccess){
       toast.success(isUpdating ? "Review Updated" : "Review Posted");
+      router.refresh();
     }
-    router.refresh();
   }, [error, isSuccess]);
 
   const openModal = () =>{
     ratingRef.current = existingUserReview?.rating;
     commentRef.current = existingUserReview?.comment;
     
-    setIsValid(Boolean(existingUserReview)); 
+    setIsValid(Boolean(existingUserReview));
     setShow(true);
   };
 
@@ -93,24 +94,26 @@ const NewReview = () =>{
             <Modal.Title>Submit Review</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body>
-            <Rating
-            iconsCount={5}
-            initialValue={ratingRef.current}
-            fillColor="#FFA41C"
-            size={35}
-            onClick={(e) => {
+          <Modal.Body className="p-4">
+            <StarRating
+            starsLength={5}
+            isHoverEnabled
+            initialRating={ratingRef.current || existingUserReview}
+            color="#FFA41C"
+            dimension={13}
+            onRatingChange={(e) => {
               (ratingRef.current = e)
               modalValidation()
-            }}
-            SVGclassName="inline-block"/>
+            }}/>
+
             <br/>
+
             <textarea
             name="review"
             rows={3}
             className="mt-3 w-full border-1 rounded"
             placeholder="Enter your comment"
-            defaultValue={commentRef.current}
+            defaultValue={commentRef?.current}
             onChange={(e) => {
               commentRef.current = e.target.value
               modalValidation()
