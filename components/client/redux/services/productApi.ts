@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { CategorizedProductsProps } from "../../type/product/categorizedProps";
 
 export const productAPI = createApi({
   reducerPath: "productAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/v1"
   }),
-  tagTypes: ["Product", "Reviews"],
+  tagTypes: ["Product"],
   endpoints: (builder) =>({
     createProduct: builder.mutation({
       query(body){
@@ -35,6 +36,10 @@ export const productAPI = createApi({
     }),
     getProductDetails: builder.query({
       query: (id) => `/product/${id}`,
+      providesTags: (result, error, id) => [{ type: "Product", id }]
+    }),
+    getCategorizedProducts: builder.query<CategorizedProductsProps[], string>({
+      query: (category) => `/products/${category}`,
       providesTags: ["Product"]
     })
   })
@@ -45,5 +50,6 @@ export const {
   useGetProductsMutation,
   useGetUserProductsQuery,
   useGetFilteredProductsQuery,
-  useGetProductDetailsQuery
+  useGetProductDetailsQuery,
+  useGetCategorizedProductsQuery
 } = productAPI;

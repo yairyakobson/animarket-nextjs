@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import { productAPI } from "./productApi";
+
 export const reviewAPI = createApi({
   reducerPath: "reviewAPI",
   baseQuery: fetchBaseQuery({
@@ -15,7 +17,14 @@ export const reviewAPI = createApi({
           body
         }
       },
-      invalidatesTags: ["Reviews"]
+      invalidatesTags: ["Reviews"],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }){
+        try{
+          await queryFulfilled;
+          dispatch(productAPI.util.invalidateTags([{ type: "Product", id: arg.productId }]));
+        }
+        catch{}
+      }
     }),
     getProductReviews: builder.query({
       query: (productId) => `/reviews/${productId}`,
