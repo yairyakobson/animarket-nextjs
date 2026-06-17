@@ -1,10 +1,22 @@
-import { getServerUser } from "@/components/server/utils/cookies/clientCookie";
-
 import Home from "@/components/client/pages/Home";
 
-export default async function Homepage(){
-  const user = await getServerUser();
-  const username = user ? user?.name : "Guest";
+import { fetchLatestProducts, fetchTopRatedProducts } from "@/components/server/dataAccess/filteredProducts";
 
-  return <Home username={username}/>
+import { oneWeekAgo } from "@/components/server/utils/date";
+
+export default async function Homepage(){
+  const minRating: number = 4.5;
+
+  const [latestProducts, topRatedProducts] = await Promise.all([
+    fetchLatestProducts(oneWeekAgo()),
+    fetchTopRatedProducts(minRating)
+  ]);
+
+  return(
+    <>
+      <Home
+      topRatedProducts={topRatedProducts}
+      latestProducts={latestProducts}/>
+    </>
+  )
 }

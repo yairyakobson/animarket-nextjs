@@ -1,24 +1,26 @@
 "use client"
 
-import { Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import { HomeProps } from "../clientInterfaces/pageInterfaces/homepageProps";
 
-export default function Home({ username }: HomeProps){
+import TopRatedProducts from "@/components/client/layout/Products/TopRated";
+import LatestProducts from "@/components/client/layout/Products/Latest";
+
+export default function Home({ topRatedProducts, latestProducts }: HomeProps){
   return(
     <>
-      <section className="hero flex-grow bg-gray-200">
-        <section className="hero-overlay bg-gray-500 flex flex-col !items-center !max-w-fill">
-          <h1 className="mt-5 !text-5xl font-bold text-center">
-            {`Welcome to Animarket ${username}`}
-          </h1>
-          <p className="mt-5 text-center max-w-xl">
-            Your one-stop shop for everything Anime
-          </p>
+      <section className="hero flex-grow">
+        <section className="hero-overlay bg-gray-500">
           <section>
-            <Button className="mt-5 btn btn-danger !shadow-none" href="/signup">
-              Get Started
-            </Button>
+            <Container className="!grid !grid-cols-1
+            md:!grid-cols-2 gap-x-12 mt-5 justify-items-center gap-y-12">
+              <TopRatedProducts topRatedProducts={topRatedProducts}/>
+              <LatestProducts latestProducts={latestProducts}/>
+            </Container>
+            <section className="justify-items-center grid grid-cols-1 mt-5">
+              <h6 className="bg-white w-[10rem] h-[10rem] text-center">Shop By Category</h6>
+            </section>
           </section>
         </section>
       </section>
