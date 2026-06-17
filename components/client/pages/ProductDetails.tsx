@@ -2,9 +2,17 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
-import { Rating } from "react-simple-star-rating";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  Image
+} from "react-bootstrap";
 import { toast } from "sonner";
+
+import { ProductRating } from "../layout/ProductRating";
 
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useGetProductDetailsQuery } from "../redux/services/productApi";
@@ -58,23 +66,20 @@ export default function ProductDetails(){
       ) : (
         <Container as="section" fluid>
         <section className="hero my-5">
-          <section className="flex flex-col gap-y-8 lg:flex-row gap-x-16">
-            <img
-            src={product?.url}
+          <section className="flex flex-col gap-y-8
+          lg:flex-row gap-x-16">
+            <Image
+            src={product?.url as string}
             className="max-w-sm rounded-lg"/>
             <section>
               <h1 className="text-5xl font-bold">{product?.name}</h1>
-              <Rating
-              iconsCount={5}
-              initialValue={product?.averageRating}
-              allowFraction={true}
-              fillColor="#FFA41C"
-              size={25}
-              readonly
-              SVGclassName="inline-block"/>
-              <span id="no-of-reviews" className="px-2 relative top-[0.075rem]">
-                ({product?.totalReviews} Reviews)
-              </span>
+              <ProductRating
+              rating={product?.averageRating}
+              className="1.7rem"
+              isReadOnly={true}/>
+              <Col as="section" className="!inline-flex leading-none transform -translate-y-[8px] ml-2">
+                ({product?.averageRating})
+              </Col>
               <p className={`${productDetailsStyles.productPrice} text-2xl font-bold mt-3`}>
                 {"$" + product?.price}
               </p>
