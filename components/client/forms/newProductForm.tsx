@@ -4,7 +4,7 @@ import { Button, Col, Container, FloatingLabel, Form, Image, Row } from "react-b
 import { toast } from "sonner";
 
 import { PRODUCT_CATEGORIES } from "../constants/categories/productConstants";
-import { PRODUCT_CONDITION } from "../constants/condition/productConstants";
+import { PRODUCT_CONDITION } from "../constants/condition/conditionConstants";
 
 import { NewProductProps } from "../clientInterfaces/formInterfaces/newProductProps";
 import { useCreateProductMutation } from "../redux/services/productApi";
@@ -27,6 +27,20 @@ const NewProductForm: React.FC<NewProductProps> = ({
   const router = useRouter();
 
   const { user } = useAppSelector((state) => state.user);
+
+  const productFormCategories: PRODUCT_CATEGORIES[] = [
+    PRODUCT_CATEGORIES.Accessories,
+    PRODUCT_CATEGORIES.Anime,
+    PRODUCT_CATEGORIES.Fashion,
+    PRODUCT_CATEGORIES.Manga,
+    PRODUCT_CATEGORIES.Miscellaneous
+  ];
+
+  const productFormConditions: PRODUCT_CONDITION[] = [
+    PRODUCT_CONDITION.New,
+    PRODUCT_CONDITION.LikeNew,
+    PRODUCT_CONDITION.Refurbished
+  ];
 
   const [createProduct, { error, isLoading }] = useCreateProductMutation();
   console.log("Error:", error);
@@ -162,8 +176,9 @@ const NewProductForm: React.FC<NewProductProps> = ({
                 onChange={productDataHandler}
                 required>
                 <option value="" disabled>Category</option>
-                {PRODUCT_CATEGORIES?.map((category) =>(
-                  <option key={category} value={category}>{category}</option>
+                {productFormCategories?.map((productFormCategory) =>(
+                  <option key={productFormCategory}
+                  value={productFormCategory}>{productFormCategory}</option>
                 ))}
                 </Form.Select>
               </FloatingLabel>
@@ -176,8 +191,9 @@ const NewProductForm: React.FC<NewProductProps> = ({
                 onChange={productDataHandler}
                 required>
                 <option value="" disabled>Condition</option>
-                {PRODUCT_CONDITION?.map((condition) =>(
-                  <option key={condition} value={condition}>{condition}</option>
+                {productFormConditions?.map((productFormCondition) =>(
+                  <option key={productFormCondition}
+                  value={productFormCondition}>{productFormCondition}</option>
                 ))}
                 </Form.Select>
               </FloatingLabel>
