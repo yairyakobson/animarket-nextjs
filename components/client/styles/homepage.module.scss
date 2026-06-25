@@ -1,0 +1,16 @@
+.productsContainer{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 3rem;
+  margin-top: 3rem;
+  padding: 0 1.5rem 0 1.5rem;
+  justify-items: center;
+}
+
+@media (width <= 48rem){
+  .productsContainer{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    row-gap: 3rem;
+  }
+}
