@@ -1,3 +1,10 @@
+.userProductsContainer{
+  display: grid;
+  row-gap: 1rem;
+  margin-top: 1.5rem;
+  justify-items: center;
+}
+
 .card-title{
   display: flex;
   gap: 0.8rem !important;
@@ -26,4 +33,16 @@
   border-radius: 0.5rem;
   padding-block: 0.2rem;
   padding-inline: 0.3rem;
+}
+
+@media (width >= 48rem){
+  .userProductsContainer{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 80rem){
+  .userProductsContainer{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
