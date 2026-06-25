@@ -6,20 +6,19 @@ import { Col, Image } from "react-bootstrap";
 import { LatestProductsMapping } from "../../clientInterfaces/pageInterfaces/latestProductsProps";
 import { ProductRating } from "../ProductRating";
 
+import latestProductStyles from "../../styles/latestProducts.module.scss";
 import userProductsStyles from "../../styles/userProducts.module.scss";
 
 const LatestProducts: React.FC<LatestProductsMapping> = ({ latestProducts }) =>{
   return(
     <>
-      <section className="bg-gray-200 w-full h-full">
+      <section className={latestProductStyles.latestProductsWrapper}>
       <h3 className="text-center mt-3">Latest</h3>
-      <section className="w-full h-[27rem] mt-4 overflow-y-auto mb-3">
-        <section className="w-full grid grid-cols-2 place-items-center gap-4
-        md:grid-cols-1
-        lg:grid-cols-2 gap-4">
+      <section className={latestProductStyles.latestProductsContainer}>
+        <section className={latestProductStyles.latestProductsContent}>
           {latestProducts?.map((product) => (
             <section key={product?.id} className="card w-[15rem] h-[15rem]">
-              <figure className="relative h-[12.5rem] w-full bg-neutral">
+              <figure className="relative w-full h-[12.5rem] bg-neutral">
                 <Image
                 src={product?.url as string || "/placeholder.webp"}
                 alt={product?.name}

@@ -28,11 +28,7 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
   return(
     <>
       <UserProductsNavbar sortBy={sortBy} onSortChange={setSortBy}/>
-      <Container className="!grid mt-3
-      !gap-y-4 justify-items-center
-      md:!grid-cols-2
-      lg:!grid-cols-2
-      xl:!grid-cols-3">
+      <Container className={userProductsStyles.userProductsContainer}>
         {sortedProducts?.map((product) =>(
           <section key={product?.id}
           className="card !max-w-full shadow-sm

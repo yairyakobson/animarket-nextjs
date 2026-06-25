@@ -6,20 +6,19 @@ import { Col, Image } from "react-bootstrap";
 import { TopRatedProductsMapping } from "../../clientInterfaces/pageInterfaces/topProductsProps";
 import { ProductRating } from "../ProductRating";
 
+import topProductStyles from "../../styles/topProducts.module.scss";
 import userProductsStyles from "../../styles/userProducts.module.scss";
 
 const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts }) =>{
   return(
     <>
-      <section className="bg-gray-200 w-full h-full">
+      <section className={topProductStyles.topProductsWrapper}>
       <h3 className="text-center mt-3">Top Rated</h3>
-      <section className="w-full h-[27rem] mt-4 overflow-y-auto mb-3">
-        <section className="w-full grid grid-cols-2 place-items-center gap-4
-        md:grid-cols-1
-        lg:grid-cols-2 gap-4">
+      <section className={topProductStyles.topProductsContainer}>
+        <section className={topProductStyles.topProductsContent}>
           {topRatedProducts?.map((product) => (
             <section key={product?.id} className="card w-[15rem] h-[15rem]">
-              <figure className="relative h-[12.5rem] w-full bg-neutral">
+              <figure className="relative w-full h-[12.5rem] bg-neutral">
                 <Image
                 src={product?.url as string || "/placeholder.webp"}
                 alt={product?.name}
@@ -31,7 +30,6 @@ const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts 
                   <Link href={`/product/${product?.id}`}
                   className="text-decoration-none text-black">{product?.name}</Link>
                 </h5>
-
                 <section className="flex items-center gap-2">
                   <ProductRating
                   rating={product?.averageRating}
