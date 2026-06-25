@@ -1,0 +1,49 @@
+.categoryListWrapper{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.categoryListContainer{
+  width: 100%;
+  height: 20rem;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+
+  .categoryListContent{
+    display: grid;
+    width: 100%;
+    place-items: center;
+  }
+
+  .categoryName{
+    position: absolute;
+    display: flex;
+    inset: 0;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.8rem;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}
+
+@media (width >= 48rem){
+  .categoryListContent{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 64rem){
+  .categoryListContent{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 80rem){
+  .categoryListContent{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
