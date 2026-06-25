@@ -28,19 +28,8 @@ const NewProductForm: React.FC<NewProductProps> = ({
 
   const { user } = useAppSelector((state) => state.user);
 
-  const productFormCategories: PRODUCT_CATEGORIES[] = [
-    PRODUCT_CATEGORIES.Accessories,
-    PRODUCT_CATEGORIES.Anime,
-    PRODUCT_CATEGORIES.Fashion,
-    PRODUCT_CATEGORIES.Manga,
-    PRODUCT_CATEGORIES.Miscellaneous
-  ];
-
-  const productFormConditions: PRODUCT_CONDITION[] = [
-    PRODUCT_CONDITION.New,
-    PRODUCT_CONDITION.LikeNew,
-    PRODUCT_CONDITION.Refurbished
-  ];
+  const productFormCategories = Object.values(PRODUCT_CATEGORIES);
+  const productFormConditions = Object.values(PRODUCT_CONDITION);
 
   const [createProduct, { error, isLoading }] = useCreateProductMutation();
   console.log("Error:", error);
