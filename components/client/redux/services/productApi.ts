@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CategorizedProductsProps } from "../../type/product/categorizedProps";
+
+import { CategorizedProductProps } from "../../type/product/categorizedProducts";
 
 export const productAPI = createApi({
   reducerPath: "productAPI",
@@ -38,7 +39,7 @@ export const productAPI = createApi({
       query: (id) => `/product/${id}`,
       providesTags: (result, error, id) => [{ type: "Product", id }]
     }),
-    getCategorizedProducts: builder.query<CategorizedProductsProps[], string>({
+    getCategorizedProducts: builder.query<CategorizedProductProps[], string>({
       query: (category) => `/products/${category}`,
       providesTags: ["Product"]
     })

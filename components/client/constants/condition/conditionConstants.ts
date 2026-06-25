@@ -3,5 +3,3 @@ export enum PRODUCT_CONDITION{
   LikeNew = "Like New",
   Refurbished = "Refurbished"
 }
-
-export const Condition = Object.values(PRODUCT_CONDITION);

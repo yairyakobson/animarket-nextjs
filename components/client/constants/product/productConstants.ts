@@ -16,18 +16,7 @@ export const SORTING_STRATEGIES: Record<
     }
     
     return a.name.localeCompare(b.name);
-  },
-  /* "Number Of Reviews": (a, b) => {
-    const ratingDiff = Number(b.totalReviews) - Number(a.totalReviews);
-    
-    // 2. If ratings are different, return the difference
-    if(ratingDiff !== 0){
-      return ratingDiff;
-    }
-    
-    // 3. Tie-breaker: If ratings are identical, sort alphabetically by name
-    return a.name.localeCompare(b.name);
-  } */
+  }
 };
 
 export const USER_PRODUCT_FILTERS = Object.keys(SORTING_STRATEGIES);
