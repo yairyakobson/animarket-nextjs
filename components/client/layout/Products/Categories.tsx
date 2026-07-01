@@ -7,7 +7,7 @@ import { Image } from "react-bootstrap";
 import { CategoriesMapping } from "../../clientInterfaces/pageInterfaces/categoryProps";
 import { PRODUCT_CATEGORIES } from "../../constants/categories/productConstants";
 
-import categoryListStyles from "../../styles/categoryList.module.scss"
+import categoryListStyles from "../../styles/homepageStyles/categoryList.module.scss";
 
 const ProductCategories: React.FC<CategoriesMapping> = () =>{
   const categoryList = Object.values(PRODUCT_CATEGORIES);

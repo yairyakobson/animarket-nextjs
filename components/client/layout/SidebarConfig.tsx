@@ -10,7 +10,7 @@ import { FaProductHunt } from "react-icons/fa";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { SidebarPagesProps } from "../clientInterfaces/sidebarProps";
 
-import sidebarStyles from "../styles/sidebar.module.scss";
+import sidebarStyles from "../../styles/layoutStyles/sidebar.module.scss";
 
 export default function SidebarConfig(){
   const pathName = usePathname();

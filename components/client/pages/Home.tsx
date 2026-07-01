@@ -8,7 +8,7 @@ import TopRatedProducts from "../layout/Products/TopRated";
 import LatestProducts from "../layout/Products/Latest";
 import ProductCategories from "../layout/Products/Categories";
 
-import homepageStyles from "../styles/homepage.module.scss";
+import homepageStyles from "../styles/homepageStyles/homepage.module.scss";
 
 export default function Home({ topRatedProducts, latestProducts, productCategories }: HomeProps){
   return(

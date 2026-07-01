@@ -12,7 +12,7 @@ import {
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useLazyLogoutUserQuery } from "../../redux/services/authApi";
 
-import navbarStyles from "../../styles/navbar.module.scss";
+import navbarStyles from "../../styles/layoutStyles/navbar.module.scss";
 
 function MobileNavbar(){
   const { user } = useAppSelector((state) => state.user);

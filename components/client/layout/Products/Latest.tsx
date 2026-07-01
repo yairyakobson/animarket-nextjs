@@ -6,8 +6,8 @@ import { Col, Image } from "react-bootstrap";
 import { LatestProductsMapping } from "../../clientInterfaces/pageInterfaces/latestProductsProps";
 import { ProductRating } from "../ProductRating";
 
-import latestProductStyles from "../../styles/latestProducts.module.scss";
-import userProductsStyles from "../../styles/userProducts.module.scss";
+import latestProductStyles from "../../styles/homepageStyles/latestProducts.module.scss";
+import userProductsStyles from "../../styles/userStyles/userProducts.module.scss";
 
 const LatestProducts: React.FC<LatestProductsMapping> = ({ latestProducts }) =>{
   return(

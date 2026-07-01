@@ -4,7 +4,9 @@ import { usePathname } from "next/navigation";
 import { Container, Image, Nav, Navbar } from "react-bootstrap";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import navbarStyles from "../styles/navbar.module.scss";
+import SearchInput from "./SearchInput";
+
+import navbarStyles from "../styles/layoutStyles/navbar.module.scss";
 
 function MainNavbar(){
   const pathname = usePathname();
@@ -26,6 +28,7 @@ function MainNavbar(){
               className={navbarStyles.logo}/>
             </picture>
           </Navbar.Brand>
+          <SearchInput/>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"
           className={navbarStyles.customToggler}>
             <RxHamburgerMenu color="white"

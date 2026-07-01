@@ -7,7 +7,7 @@ import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { USER_PRODUCT_FILTERS } from "../constants/product/productConstants";
 import { FilteringProps } from "../clientInterfaces/filteringProps";
 
-import productsNavbarStyles from "../styles/productNavbar.module.scss";
+import productsNavbarStyles from "../../styles/productNavbar.module.scss";
 
 function UserProductsNavbar({ sortBy, onSortChange }: FilteringProps){
   return(

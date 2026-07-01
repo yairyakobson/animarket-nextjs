@@ -8,7 +8,7 @@ import { Dropdown } from "react-bootstrap";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useLazyLogoutUserQuery } from "../../redux/services/authApi";
 
-import navbarStyles from "../../styles/navbar.module.scss";
+import navbarStyles from "../../styles/layoutStyles/navbar.module.scss";
 
 function DesktopNavbar(){
   const { user } = useAppSelector((state) => state.user);

@@ -3,12 +3,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Container, Image, Navbar } from "react-bootstrap";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 import MobileNavbar from "./Navbar/MobileNavbat";
 import DesktopNavbar from "./Navbar/DesktopNavbar";
+import SearchInput from "./SearchInput";
 
-import navbarStyles from "../styles/navbar.module.scss";
-import { RxHamburgerMenu } from "react-icons/rx";
+import navbarStyles from "../styles/layoutStyles/navbar.module.scss";
 
 function UserNavbar(){
   const pathname = usePathname();
@@ -35,6 +36,7 @@ function UserNavbar(){
               className={navbarStyles.logo}/>
             </picture>
           </Navbar.Brand>
+          <SearchInput/>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md"
           className={navbarStyles.customToggler}>
             <RxHamburgerMenu color="white"

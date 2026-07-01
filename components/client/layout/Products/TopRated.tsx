@@ -6,8 +6,8 @@ import { Col, Image } from "react-bootstrap";
 import { TopRatedProductsMapping } from "../../clientInterfaces/pageInterfaces/topProductsProps";
 import { ProductRating } from "../ProductRating";
 
-import topProductStyles from "../../styles/topProducts.module.scss";
-import userProductsStyles from "../../styles/userProducts.module.scss";
+import topProductStyles from "../../styles/homepageStyles/topProducts.module.scss";
+import userProductsStyles from "../../styles/userStyles/userProducts.module.scss";
 
 const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts }) =>{
   return(
