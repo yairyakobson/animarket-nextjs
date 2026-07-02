@@ -42,6 +42,11 @@ export const productAPI = createApi({
     getCategorizedProducts: builder.query<CategorizedProductProps[], string>({
       query: (category) => `/products/${category}`,
       providesTags: ["Product"]
+    }),
+    getSearchResults: builder.query({
+      query: (name) =>({
+        url: `/products/search/${name}`
+      })
     })
   })
 });
@@ -52,5 +57,6 @@ export const {
   useGetUserProductsQuery,
   useGetFilteredProductsQuery,
   useGetProductDetailsQuery,
-  useGetCategorizedProductsQuery
+  useGetCategorizedProductsQuery,
+  useGetSearchResultsQuery
 } = productAPI;
