@@ -1,4 +1,4 @@
-import { asc, desc, eq, gte } from "drizzle-orm";
+import { asc, desc, eq, gte, ilike } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
 import { products } from "@/drizzle-utils/schemas";
@@ -46,4 +46,16 @@ export const fetchCategorizedProducts = async(category: string) =>{
   );
   
   return fetchedCategorizedProducts;
+}
+
+export const fetchSearchedProducts = async(query: string) =>{
+  const userFetchingResult = await db
+  .select()
+  .from(products)
+  .where(
+    ilike(products.name, `%${query}%`)
+  )
+  .orderBy(asc(products.name));
+  
+  return userFetchingResult;
 }
