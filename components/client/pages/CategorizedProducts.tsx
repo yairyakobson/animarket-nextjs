@@ -6,7 +6,7 @@ import { Col, Container, Image } from "react-bootstrap";
 import { CategorizedProductsMapping } from "../clientInterfaces/pageInterfaces/categorizedProps";
 import { ProductRating } from "../layout/ProductRating";
 
-import userProductsStyles from "../styles/userProducts.module.scss";
+import userProductsStyles from "../styles/userStyles/userProducts.module.scss";
 
 const CategorizedProducts = ({ categoryProducts }: CategorizedProductsMapping) =>{
   return(
