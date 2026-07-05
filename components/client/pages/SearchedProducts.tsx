@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { Col, Image } from "react-bootstrap";
 
-import { SearchedProductsMapping } from "../../clientInterfaces/productInterfaces/searchedProductsProps";
+import { SearchedProductsMapping } from "../clientInterfaces/productInterfaces/searchedProductsProps";
 
-import { ProductRating } from "../ProductRating";
+import { ProductRating } from "../layout/ProductRating";
 
-import searchedProductsStyles from "../../styles/layoutStyles/searchProducts.module.scss"
-import userProductsStyles from "../../styles/userStyles/userProducts.module.scss";
+import searchedProductsStyles from "../styles/layoutStyles/searchProducts.module.scss"
+import userProductsStyles from "../styles/userStyles/userProducts.module.scss";
 
 const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts }) =>{
   return(
     <>
-      <section className={searchedProductsStyles.SearchedContent}>
+      <section className={searchedProductsStyles.searchedContent}>
         {searchedProducts?.map((product) => (
           <section key={product?.id} className="card w-[15rem] h-[15rem]">
             <figure className="relative w-full h-[12.5rem] bg-neutral">
