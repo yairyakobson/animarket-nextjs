@@ -1,7 +1,7 @@
 import { fetchSearchedProducts } from "@/components/server/dataAccess/filteredProducts";
 import { ProductSearchProps } from "@/components/client/clientInterfaces/productInterfaces/searchProps";
 
-import SearchedProducts from "@/components/client/layout/Products/Results";
+import SearchedProducts from "@/components/client/pages/SearchedProducts";
 
 export default async function SearchedProductsDisplay({ params }: ProductSearchProps) {
   const resolvedParams = await params;
