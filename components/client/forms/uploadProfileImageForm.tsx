@@ -8,7 +8,7 @@ import { UploadImageFunctions } from "../clientInterfaces/formInterfaces/uploadI
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useOptimisticUpdate } from "../hooks/useOptimisticUpdate";
 
-import uploadImageStyles from "../styles/uploadImage.module.scss";
+import uploadImageStyles from "../styles/formStyles/uploadImage.module.scss";
 
 const UploadProfileImageForm = ({
   initialUser,

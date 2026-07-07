@@ -12,7 +12,7 @@ import { useForgotPasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";
 
-import forgotPasswordStyles from "../styles/forgotPassword.module.scss";
+import forgotPasswordStyles from "../styles/formStyles/forgotPassword.module.scss";
 
 const ForgotPasswordForm: React.FC<ForgotPasswordProps> = ({
   emailHandler,

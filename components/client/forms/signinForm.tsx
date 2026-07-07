@@ -17,7 +17,7 @@ import { useAppSelector } from "../hooks/useAppSelector";
 
 import errorMessage from "../errors/error";
 
-import signinStyles from "../styles/signin.module.scss";
+import signinStyles from "../styles/formStyles/signin.module.scss";
 
 const SigninForm: React.FC<SigninProps> = ({
   emailHandler,

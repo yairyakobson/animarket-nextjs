@@ -15,7 +15,7 @@ import { useUpdatePasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";
 
-import changePasswordStyles from "../styles/changePassword.module.scss";
+import changePasswordStyles from "../styles/formStyles/changePassword.module.scss";
 
 const ChangePasswordForm: React.FC<ChangePasswordProps> = ({
   currentPasswordHandler,

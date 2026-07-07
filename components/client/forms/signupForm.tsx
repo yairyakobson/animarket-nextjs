@@ -14,7 +14,7 @@ import { useSignupUserMutation } from "../redux/services/authApi";
 
 import errorMessage from "../errors/error";
 
-import signupStyles from "../styles/signup.module.scss";
+import signupStyles from "../styles/formStyles/signup.module.scss";
 
 const SignupForm: React.FC<SignupProps> = ({
   userHandler,

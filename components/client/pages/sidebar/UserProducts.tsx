@@ -11,7 +11,7 @@ import { UserProductsMapping } from "../../clientInterfaces/productInterfaces/us
 
 import UserProductsNavbar from "../../layout/UserProductsNavbar";
 
-import userProductsStyles from "../../styles/userProducts.module.scss";
+import userProductsStyles from "../../styles/userStyles/userProducts.module.scss";
 
 const UserProducts = ({ userProducts }: UserProductsMapping) =>{
   const [sortBy, setSortBy] = useState<string>("Name (A-Z)");

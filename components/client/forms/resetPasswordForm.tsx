@@ -16,7 +16,7 @@ import { useResetPasswordMutation } from "../redux/services/userApi";
 
 import errorMessage from "../errors/error";
 
-import resetPasswordStyles from "../styles/resetPassword.module.scss";
+import resetPasswordStyles from "../styles/formStyles/resetPassword.module.scss";
 
 const ResetPasswordForm: React.FC<ResetPasswordProps> = ({
   newPasswordHandler,
