@@ -4,11 +4,19 @@
   width: 100%;
   align-items: flex-start;
 
+  .resultsColumn{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
   .searchedContent{
     display: grid;
     row-gap: 1rem;
-    flex: auto;
-    place-items: center;
+    column-gap: 1rem;
+    flex: 1;
+    justify-content: center;
+    place-items: center
   }
 }
 
