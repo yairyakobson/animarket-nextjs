@@ -8,7 +8,7 @@
   justify-items: center;
 }
 
-@media (width <= 48rem){
+@media(width <= 48rem){
   .productsContainer{
     grid-template-columns: repeat(1, minmax(0, 1fr));
     row-gap: 3rem;
