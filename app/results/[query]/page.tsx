@@ -18,7 +18,6 @@ export default async function SearchedProductsDisplay({ params }: ProductSearchP
 
   return(
     <>
-      <h1 className="mb-4 text-center mt-3">Found {searchedProducts?.length} products</h1>
       <SearchedProducts searchedProducts={searchedProducts}/>
     </>
  );
