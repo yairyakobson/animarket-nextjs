@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Col, Image, Pagination } from "react-bootstrap";
+import { Col, Image } from "react-bootstrap";
 
 import SearchedProductsSidebar from "../layout/SearchedProductsSidebar";
 

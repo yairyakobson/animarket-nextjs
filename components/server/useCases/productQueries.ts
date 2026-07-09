@@ -1,4 +1,4 @@
-import { eq, gte, ilike, sql, SQL } from "drizzle-orm";
+import { eq, ilike, sql, SQL } from "drizzle-orm";
 import { ProductFilterInput } from "../schemas/zod/zod-product/ZodProductFilter";
 import { products } from "@/drizzle-utils/schemas";
 
