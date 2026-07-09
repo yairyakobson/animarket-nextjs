@@ -1,5 +1,3 @@
-"use client";
-
 import { Form } from "react-bootstrap";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -11,9 +9,9 @@ function SearchInput(){
     e.preventDefault();
     
     const formData = new FormData(e.currentTarget);
-    const userTypedQuery = formData.get("searchInput")?.toString()?.trim(); // Grabs keyword from Form Input
+    const userTypedQuery = formData.get("searchInput")?.toString()?.trim();
 
-    if (!userTypedQuery) return; // safety for not writing anything in the search input
+    if (!userTypedQuery) return; 
 
     const queryStructure = userTypedQuery
     .replace(/\+/g, "%2B")
