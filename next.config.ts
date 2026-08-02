@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
+    useTypeScriptCli: true,
     serverActions: {
       bodySizeLimit: "5mb"
     }
@@ -19,7 +20,7 @@ const nextConfig: NextConfig = {
       port: "3000",
       pathname: "/api/v1/avatar/**"
     }]
-  }
+  },
 };
 
 export default nextConfig;
