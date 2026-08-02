@@ -31,8 +31,13 @@ export const productAPI = createApi({
       })
     }),
     getFilteredProducts: builder.query({
-      query: () =>({
-        url: "/products/filter"
+      query: (queryString: any) =>({
+        url: `/products/filter${queryString}`,
+        params: {
+          "rating[gte]": queryString?.rating,
+          "price[gte]": queryString?.minPrice,
+          "price[lte]": queryString?.maxPrice
+        }
       })
     }),
     getProductDetails: builder.query({
