@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { NOT_FOUND, OK } from "@/components/server/constants/httpCodes";
+import { NOT_FOUND } from "@/components/server/constants/httpCodes";
 
 import { fetchSearchedProducts } from "@/components/server/dataAccess/filteredProducts";
 
@@ -12,7 +12,7 @@ export async function GET(
 
   const products = await fetchSearchedProducts(name);
 
-  if(!products){
+  if(!products || products.length === 0){
     return NextResponse.json({
       error: "No products found" },
       { status: NOT_FOUND }
