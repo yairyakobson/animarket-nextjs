@@ -1,11 +1,10 @@
+import { useRouter } from "next/navigation";
 import { Form } from "react-bootstrap";
-import { useSearchParams, useRouter } from "next/navigation";
 
 function SearchInput(){
-  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const handleSearchSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = (e: React.SubmitEvent<HTMLFormElement>) =>{
     e.preventDefault();
     
     const formData = new FormData(e.currentTarget);
@@ -13,13 +12,8 @@ function SearchInput(){
 
     if (!userTypedQuery) return; 
 
-    const queryStructure = userTypedQuery
-    .replace(/\+/g, "%2B")
-    .replace(/\s+/g, "+");
-
-    const currentQueries = new URLSearchParams(searchParams.toString());
-
-    router.push(`/results/${queryStructure}?${currentQueries.toString()}`);
+    const queryStructure = encodeURIComponent(userTypedQuery);
+    router.push(`/results/${queryStructure}`);
   };
 
   return(
