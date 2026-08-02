@@ -41,14 +41,14 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
                 rating={product?.averageRating}
                 className="1.5rem"
                 isReadOnly={true}/>
-                <Col as="section" className="leading-none transform -translate-y-[1.5px]">
+                <Col as="span" className="leading-none transform -translate-y-[1.5px]">
                   ({product?.averageRating})
                 </Col>
                 </section>
 
                 <section className="card-actions items-center justify-end">
                   <section className={`${userProductsStyles.priceBadge} badge-outline mt-2`}>
-                    {"$" + product.price}
+                    {"$" + product?.price}
                   </section>
                 </section>
               </section>

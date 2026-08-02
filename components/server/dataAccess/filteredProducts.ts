@@ -1,4 +1,4 @@
-import { asc, desc, eq, gte, ilike } from "drizzle-orm";
+import { asc, desc, eq, gte, like } from "drizzle-orm";
 
 import { db } from "@/drizzle-utils/main-config";
 import { products } from "@/drizzle-utils/schemas";
@@ -53,7 +53,7 @@ export const fetchSearchedProducts = async(query: string) =>{
   .select()
   .from(products)
   .where(
-    ilike(products.name, `%${query}%`)
+    like(products.name, `%${query}%`)
   )
   .orderBy(asc(products.name));
   

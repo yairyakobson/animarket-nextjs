@@ -8,7 +8,7 @@ export default function SearchedProductsSidebar()
         <section className="drawer drawer-open">
           <section className="drawer-toggle"/>
             <section className="drawer-side">
-              <section className="block h-screen bg-gray-200">
+              <section className="block w-[20rem] h-screen bg-gray-200">
                 <ul className="menu p-4">
                   <SearchbarConfig/>
                 </ul>

@@ -1,6 +1,10 @@
 "use client"
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams
+} from "next/navigation";
 import { Form } from "react-bootstrap";
 
 import { ProductRating } from "@/components/client/layout/ProductRating";
