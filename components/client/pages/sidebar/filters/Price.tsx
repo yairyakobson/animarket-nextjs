@@ -1,62 +1,60 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useRef } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams
+} from "next/navigation";
+import { Button, Form } from "react-bootstrap";
 
 import { getPriceQueryParams } from "./priceQueries";
 
 export const Price = () =>{
-  const priceRef = useRef({
-    min: "",
-    max: ""
-  });
-
   const router = useRouter();
-  let [searchParams] = useSearchParams();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const priceRangeHandler = (e: any) =>{
+  const currentMin = searchParams.get("minPrice") ?? "";
+  const currentMax = searchParams.get("maxPrice") ?? "";
+
+  const priceRangeHandler = (e: React.SubmitEvent<HTMLFormElement>) =>{
     e.preventDefault();
-    
-    const min = priceRef.current.min;
-    const max = priceRef.current.max;
+    const formData = new FormData(e.currentTarget);
+    const minPrice = formData.get("minPrice") as string;
+    const maxPrice = formData.get("maxPrice") as string;
 
-    searchParams = getPriceQueryParams(searchParams, "min", min);
-    searchParams = getPriceQueryParams(searchParams, "max", max);
+    const queryString = getPriceQueryParams(searchParams, { minPrice, maxPrice });
+    const targetPath = queryString ? `${pathname}?${queryString}` : pathname;
 
-    const path = window.location.pathname + "?" + searchParams.toString();
-    router.push(path);
+    router.push(targetPath);
   };
 
   return(
-    <>
-      <h5 className="mx-auto">Price</h5>
-      <Form onSubmit={priceRangeHandler} className="p-0">
-        <Row as="section">
-          <Col as="section" md={3} lg={4} className="col-5">
-            <Form.Control
-            type="text"
-            className="mt-1"
-            placeholder="Min"
-            name="minPrice"
-            defaultValue={priceRef.current.min}/>
-          </Col>
+    <section>
+      <h5 className="mb-3 text-lg font-semibold">Price</h5>
+      <Form onSubmit={priceRangeHandler} className="!flex !flex-col !gap-3">
+        <section className="flex items-center gap-2">
+          <input
+          type="number"
+          name="minPrice"
+          placeholder="Min"
+          defaultValue={currentMin}
+          min="1"
+          className="input input-bordered input-sm w-full"/>
+          <span className="text-gray-400">-</span>
+          <input
+          type="number"
+          name="maxPrice"
+          placeholder="Max"
+          defaultValue={currentMax}
+          min="1"
+          className="input input-bordered input-sm w-full"/>
+        </section>
 
-          <br />
-          <Col as="section" md={3} lg={4} className="col-5">
-            <Form.Control
-            type="text"
-            className="mt-1"
-            placeholder="Max"
-            name="maxPrice"
-            defaultValue={priceRef.current.max}/>
-          </Col>
-
-          <Col as="section" className="col-2">
-            <Button type="submit" className="btn-danger mt-1">Filter</Button>
-          </Col>
-        </Row>
+        <Button type="submit" className="btn btn-danger btn-sm w-full !shadow-none">
+          Filter Price
+        </Button>
       </Form>
-    </>
+    </section>
   );
 };
