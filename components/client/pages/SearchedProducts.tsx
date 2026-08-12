@@ -1,7 +1,10 @@
+"use client"
+
 import Link from "next/link";
 import { Col, Image } from "react-bootstrap";
 
 import SearchedProductsSidebar from "../layout/SearchedProductsSidebar";
+import MobileFiltering from "../layout/Navbar/MobileFiltering";
 
 import { SearchedProductsMapping } from "../clientInterfaces/productInterfaces/searchedProductsProps";
 
@@ -10,14 +13,17 @@ import { ProductRating } from "../layout/ProductRating";
 import searchedProductsStyles from "../styles/layoutStyles/searchProducts.module.scss"
 import userProductsStyles from "../styles/userStyles/userProducts.module.scss";
 
-const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts }) => {
-  return (
+const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts }) =>{
+  return(
     <>
       <section className={searchedProductsStyles.searchedWrapper}>
         <SearchedProductsSidebar/>
+        <section className="mb-4 mt-[1.5rem]">
+          <MobileFiltering/>
+        </section>
 
         <section className={searchedProductsStyles.resultsColumn}>
-          <h1 className={`mb-4 text-center mt-3` }>
+          <h1 className="mb-4 text-center mt-3">
             {searchedProducts && searchedProducts.length > 0 ? (
               <span>Found {searchedProducts.length} Products</span>
             ) : (
@@ -31,7 +37,7 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
             </section>
           ) : (
             <section className={searchedProductsStyles.searchedContent}>
-              {searchedProducts.map((product) => (
+              {searchedProducts.map((product) =>(
                 <section key={product?.id} className="card w-[15rem] h-[15rem]">
                   <figure className="relative w-full h-[12.5rem] bg-neutral">
                     <Image
