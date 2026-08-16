@@ -33,7 +33,6 @@ const LatestProducts: React.FC<LatestProductsMapping> = ({ latestProducts }) =>{
                 <section className="flex items-center gap-2">
                   <ProductRating
                   rating={product?.averageRating}
-                  className="1.5rem"
                   isReadOnly={true}/>
                   <Col as="section" className="leading-none transform -translate-y-[1.5px]">
                     ({product?.averageRating})

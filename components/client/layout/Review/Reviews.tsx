@@ -79,7 +79,6 @@ const Reviews: React.FC<ProductReviewsMapping> = ({ productReviews }) =>{
             <section className="my-1">
               <ProductRating
               rating={review?.rating}
-              className="1.5rem"
               isReadOnly={true}/>
             </section>
             <p className="px-[0.2rem]">{review?.comment}</p>

@@ -56,9 +56,8 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
                     </h5>
                     <section className="flex items-center gap-2">
                       <ProductRating
-                        rating={product?.averageRating}
-                        className="1.5rem"
-                        isReadOnly={true}/>
+                      rating={product?.averageRating}
+                      isReadOnly={true}/>
                       <Col as="span" className="leading-none transform -translate-y-[1.5px]">
                         ({product?.averageRating})
                       </Col>

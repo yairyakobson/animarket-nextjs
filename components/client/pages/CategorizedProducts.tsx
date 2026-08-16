@@ -29,7 +29,6 @@ const CategorizedProducts: React.FC<CategorizedProductsMapping> = ({ categoryPro
             <section className="flex items-center gap-2">
               <ProductRating
               rating={categoryProduct?.averageRating}
-              className="1.5rem"
               isReadOnly={true}/>
               <Col as="section" className="leading-none transform -translate-y-[1.5px]">
                 ({categoryProduct?.averageRating})

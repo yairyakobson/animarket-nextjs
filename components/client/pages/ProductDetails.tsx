@@ -75,7 +75,6 @@ export default function ProductDetails(){
               <h1 className="text-5xl font-bold">{product?.name}</h1>
               <ProductRating
               rating={product?.averageRating}
-              className="1.7rem"
               isReadOnly={true}/>
               <Col as="section" className="!inline-flex leading-none transform -translate-y-[8px] ml-2">
                 ({product?.averageRating})

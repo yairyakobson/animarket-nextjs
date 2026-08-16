@@ -6,7 +6,6 @@ import { ProductRatingProps } from "../clientInterfaces/productInterfaces/produc
 
 export const ProductRating = ({
   rating,
-  className,
   isReadOnly
 }: ProductRatingProps) =>{
   return(
@@ -14,7 +13,7 @@ export const ProductRating = ({
     count={5}
     value={rating ?? 0}
     color="#FFA41C"
-    size={className}
+    size="1.5rem"
     readOnly={isReadOnly}/>
   );
 };

@@ -51,7 +51,6 @@ export const RatingSearch = () =>{
             onChange={(e) => ratingHandler(starsStr, e.target.checked)}/>
             <ProductRating
             rating={stars}
-            className="1.5rem"
             isReadOnly={true}/>
           </Form.Check>
         )

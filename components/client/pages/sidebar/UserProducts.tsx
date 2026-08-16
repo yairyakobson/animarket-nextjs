@@ -49,7 +49,6 @@ const UserProducts = ({ userProducts }: UserProductsMapping) =>{
               <section className="card-actions justify-end">
                 <ProductRating
                 rating={product?.averageRating}
-                className="1.5rem"
                 isReadOnly={true}/>
                 <Col as="section" className="leading-none transform translate-y-[5px]">
                   ({product?.averageRating})
