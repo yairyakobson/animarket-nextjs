@@ -42,13 +42,7 @@
   }
 }
 
-@media screen and (width >= 64rem){
-  .searchedContent{
-    grid-template-columns: repeat(auto-fit, minmax(0, 15rem));
-  }
-}
-
-@media screen and (width >= 80rem){
+@media screen and (width >= 64rem) and (width >= 80rem){
   .searchedContent{
     grid-template-columns: repeat(auto-fit, minmax(0, 15rem));
   }
