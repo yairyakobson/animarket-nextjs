@@ -30,8 +30,8 @@ const ProductCategories: React.FC<CategoriesMapping> = () =>{
               alt="Category"
               className="w-full"/>
               <Link
-                href={`/category/${categoryList}`}
-                className={`
+              href={`/category/${categoryList}`}
+              className={`
                 ${categoryListStyles.categoryName}
                 transition-opacity duration-300
                   ${hoveredId === id ? "opacity-100 bg-black/50" : "opacity-0"}
