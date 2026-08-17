@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { Col, Image } from "react-bootstrap";
+import { Button, Col, Image } from "react-bootstrap";
 
 import { TopRatedProductsMapping } from "../../clientInterfaces/pageInterfaces/topProductsProps";
 import { ProductRating } from "../ProductRating";
@@ -9,7 +9,7 @@ import { ProductRating } from "../ProductRating";
 import topProductStyles from "../../styles/homepageStyles/topProducts.module.scss";
 import userProductsStyles from "../../styles/userStyles/userProducts.module.scss";
 
-const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts }) =>{
+const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts }) =>{  
   return(
     <>
       <section className={topProductStyles.topProductsWrapper}>
@@ -39,9 +39,18 @@ const TopRatedProducts: React.FC<TopRatedProductsMapping> = ({ topRatedProducts 
                   </Col>
                 </section>
 
-                <section className="card-actions items-center justify-end">
+                <section className="card-actions justify-start">
                   <section className={`${userProductsStyles.priceBadge} badge-outline`}>
                     {"$" + product.price}
+                  </section>
+                </section>
+                <section>
+                  <section className="card-actions justify-end">
+                    <Button href={`/product/${product?.id}`}
+                    className="text-decoration-none text-white bg-danger !border-0"
+                    size="sm">
+                      Buy Now
+                    </Button>
                   </section>
                 </section>
               </section>

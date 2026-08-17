@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { Col, Image } from "react-bootstrap";
+import { Button, Col, Image } from "react-bootstrap";
 
 import SearchedProductsSidebar from "../layout/SearchedProductsSidebar";
 import MobileFiltering from "../layout/Navbar/MobileFiltering";
@@ -41,16 +41,16 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
                 <section key={product?.id} className="card w-[15rem] h-[15rem]">
                   <figure className="relative w-full h-[12.5rem] bg-neutral">
                     <Image
-                      src={(product?.url as string) || "/placeholder.webp"}
-                      alt={product?.name}
-                      className="w-full h-full"/>
+                    src={(product?.url as string) || "/placeholder.webp"}
+                    alt={product?.name}
+                    className="w-full h-full"/>
                   </figure>
 
                   <section className="card-body justify-between">
                     <h5 className="card-title">
                       <Link
-                        href={`/product/${product?.id}`}
-                        className="text-decoration-none text-black">
+                      href={`/product/${product?.id}`}
+                      className="text-decoration-none text-black">
                         {product?.name}
                       </Link>
                     </h5>
@@ -63,9 +63,18 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
                       </Col>
                     </section>
 
-                    <section className="card-actions items-center justify-end">
+                    <section className="card-actions justify-start">
                       <section className={`${userProductsStyles.priceBadge} badge-outline mt-2`}>
                         {"$" + product?.price}
+                      </section>
+                    </section>
+                    <section>
+                      <section className="card-actions justify-end">
+                        <Button href={`/product/${product?.id}`}
+                        className="text-decoration-none text-white bg-danger !border-0"
+                        size="sm">
+                          Buy Now
+                        </Button>
                       </section>
                     </section>
                   </section>

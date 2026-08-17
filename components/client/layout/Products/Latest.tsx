@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { Col, Image } from "react-bootstrap";
+import { Button, Col, Image } from "react-bootstrap";
 
 import { LatestProductsMapping } from "../../clientInterfaces/pageInterfaces/latestProductsProps";
 import { ProductRating } from "../ProductRating";
@@ -39,10 +39,17 @@ const LatestProducts: React.FC<LatestProductsMapping> = ({ latestProducts }) =>{
                   </Col>
                 </section>
 
-                <section className="card-actions items-center justify-end">
+                <section className="card-actions justify-start">
                   <section className={`${userProductsStyles.priceBadge} badge-outline mt-2`}>
                     {"$" + product.price}
                   </section>
+                </section>
+                <section className={`card-actions justify-end`}>
+                  <Button href={`/product/${product?.id}`}
+                  className="text-decoration-none text-white bg-danger !border-0 p-2"
+                  size="sm">
+                    Buy Now
+                  </Button>
                 </section>
               </section>
             </section>
