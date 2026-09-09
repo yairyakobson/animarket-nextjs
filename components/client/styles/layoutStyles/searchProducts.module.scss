@@ -1,6 +1,6 @@
 .searchedWrapper{
   display: flex;
-  gap: 1.5rem;
+  position: relative;
   width: 100%;
   align-items: flex-start;
 
@@ -9,30 +9,14 @@
     flex-direction: column;
     flex: 1;
   }
+
   .searchedContent{
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 15rem));
     row-gap: 1rem;
     column-gap: 1rem;
     flex: 1;
     justify-content: center;
-    place-items: center
-  }
-}
-
-@media screen and (width <= 48rem){
-  .searchedContent{
-    grid-template-columns: repeat(auto-fit, minmax(0, 15rem))
-  }
-}
-
-@media screen and (width >= 48rem){
-  .searchedContent{
-    grid-template-columns: repeat(auto-fit, minmax(0, 15rem));
-  }
-}
-
-@media screen and (width >= 64rem) and (width >= 80rem){
-  .searchedContent{
-    grid-template-columns: repeat(auto-fit, minmax(0, 15rem));
+    place-items: center;
   }
 }
