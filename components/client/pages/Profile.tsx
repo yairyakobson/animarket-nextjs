@@ -6,7 +6,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { ProfileProps } from "../clientInterfaces/pageInterfaces/profileProps";
 
-import profileStyles from "../styles/profile.module.scss";
+import profileStyles from "../styles/userStyles/profile.module.scss";
 
 export default function Profile({
   username,
