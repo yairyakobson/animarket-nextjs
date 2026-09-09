@@ -1,0 +1,46 @@
+.drawerCheckbox{
+  display: none;
+}
+
+.drawerBackdrop{
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+
+  .drawerCheckbox:checked ~ & {
+    display: block;
+    background: rgb(0 0 0 / 0.4);
+  }
+
+  @media (width >= 64rem){
+    display: none !important;
+  }
+}
+
+.drawerSidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 16rem;
+  background: #e5e7eb;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+
+  .drawerCheckbox:checked ~ &{
+    transform: translateX(0);
+  }
+
+  &.noTransition{
+    transition: none;
+  }
+
+  @media (width >= 64rem){
+    position: static;
+    transform: translateX(0);
+    height: 100%;
+    flex-shrink: 0;
+  }
+}
