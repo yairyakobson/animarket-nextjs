@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { Button, Col, Image } from "react-bootstrap";
+import { Button, Col, Image, Pagination } from "react-bootstrap";
 
 import SearchedProductsSidebar from "../layout/SearchedProductsSidebar";
 import MobileFiltering from "../layout/Navbar/MobileFiltering";
@@ -18,7 +18,8 @@ const SearchedProducts: React.FC<SearchedProductsMapping> = ({ searchedProducts 
     <>
       <section className={searchedProductsStyles.searchedWrapper}>
         <SearchedProductsSidebar/>
-        <section className="mb-4 mt-[1.5rem]">
+        <section className="absolute left-5
+        lg:hidden">
           <MobileFiltering/>
         </section>
 
