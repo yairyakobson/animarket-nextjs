@@ -1,20 +1,40 @@
+"use client"
+
+import { useEffect, useState } from "react";
+
 import SearchbarConfig from "./SearchbarConfig";
 
-export default function SearchedProductsSidebar()
-{
+import drawerStyles from "../styles/layoutStyles/drawer.module.scss";
+
+export default function SearchedProductsSidebar(){
+  const [disableTransition, setDisableTransition] = useState(false);
+
+  useEffect(() =>{
+    const mediaQuery = window.matchMedia("(min-width: 64rem)");
+
+    const handleBreakpointChange = () =>{
+      setDisableTransition(true);
+
+      requestAnimationFrame(() =>{
+        requestAnimationFrame(() => setDisableTransition(false));
+      });
+    };
+
+    mediaQuery.addEventListener("change", handleBreakpointChange);
+    return () => mediaQuery.removeEventListener("change", handleBreakpointChange);
+  }, []);
+  
   return(
     <>
-      <section>
-        <section className="drawer drawer-open">
-          <section className="drawer-toggle"/>
-            <section className="drawer-side">
-              <section className="block w-[20rem] h-screen bg-gray-200">
-                <ul className="menu p-4">
-                  <SearchbarConfig/>
-                </ul>
-            </section>
-          </section>
-        </section>
+      <input id="products-drawer" type="checkbox"
+      className={drawerStyles.drawerCheckbox}/>
+      <label htmlFor="products-drawer"
+      className={drawerStyles.drawerBackdrop}/>
+      <section className={`${drawerStyles.drawerSidebar}
+        ${disableTransition ? drawerStyles.noTransition : ""}`}>
+        <ul className="menu p-4">
+          <SearchbarConfig/>
+        </ul>
       </section>
     </>
   );
