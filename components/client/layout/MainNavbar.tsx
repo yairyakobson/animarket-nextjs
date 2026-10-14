@@ -34,7 +34,7 @@ function MainNavbar(){
             <RxHamburgerMenu color="white"
             size="2rem"/>
           </Navbar.Toggle>
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav" className="flex-grow-0">
             <Nav className="ms-auto">
               <Nav.Link href="/signup" className="text-white">Sign Up</Nav.Link>
               <Nav.Link href="/signin" className="text-white">Sign In</Nav.Link>

@@ -4,6 +4,12 @@
   padding: 1rem !important;
 }
 
+.navbarGrid{
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+}
+
 .userName{
   display: flex;
   padding: 0 1rem 1rem;

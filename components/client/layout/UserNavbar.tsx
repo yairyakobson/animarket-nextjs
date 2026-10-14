@@ -27,7 +27,7 @@ function UserNavbar(){
       <Navbar expand="md"
       className={navbarStyles.navbarSpace}
       hidden={hiddenPaths}>
-        <Container as="section" fluid>
+        <Container as="section" fluid className={navbarStyles.navbarGrid}>
           <Navbar.Brand href="/">
             <picture className={navbarStyles.logoWrapper}>
               <source media="(width < 576px)" srcSet="/icon.webp"/>
@@ -36,14 +36,18 @@ function UserNavbar(){
               className={navbarStyles.logo}/>
             </picture>
           </Navbar.Brand>
-          <SearchInput/>
-          <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md"
-          className={navbarStyles.customToggler}>
-            <RxHamburgerMenu color="white"
-            size="2rem"/>
-          </Navbar.Toggle>
+          <section>
+            <SearchInput/>
+          </section>
+          <section>
+            <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md"
+            className={navbarStyles.customToggler}>
+              <RxHamburgerMenu color="white"
+              size="2rem"/>
+            </Navbar.Toggle>
             <MobileNavbar/>
             <DesktopNavbar/>
+          </section>
         </Container>
       </Navbar>
     </>
