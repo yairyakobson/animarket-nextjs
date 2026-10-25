@@ -1,9 +1,11 @@
 "use client"
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Container, Image, Navbar } from "react-bootstrap";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { FiShoppingCart } from "react-icons/fi";
 
 import MobileNavbar from "./Navbar/MobileNavbat";
 import DesktopNavbar from "./Navbar/DesktopNavbar";
@@ -27,8 +29,8 @@ function UserNavbar(){
       <Navbar expand="md"
       className={navbarStyles.navbarSpace}
       hidden={hiddenPaths}>
-        <Container as="section" fluid className={navbarStyles.navbarGrid}>
-          <Navbar.Brand href="/">
+        <Container as="section" fluid>
+          <Navbar.Brand href="/" className={navbarStyles.leftZone}>
             <picture className={navbarStyles.logoWrapper}>
               <source media="(width < 576px)" srcSet="/icon.webp"/>
               <Image src="/logo.webp"
@@ -36,8 +38,15 @@ function UserNavbar(){
               className={navbarStyles.logo}/>
             </picture>
           </Navbar.Brand>
-          <section>
+          <section className={navbarStyles.searchWrapper}>
             <SearchInput/>
+          </section>
+          <section className={navbarStyles.cartWrapper}>
+            <Link href="/profile/my_cart" className={navbarStyles.cartLink}>
+              <FiShoppingCart color="white"
+              size="2rem"/>
+              <span className={navbarStyles.cartBadge}>0</span>
+            </Link>
           </section>
           <section>
             <Navbar.Toggle aria-controls="offcanvasNavbar-expand-md"
