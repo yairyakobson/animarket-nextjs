@@ -17,7 +17,8 @@ function SearchInput(){
   };
 
   return(
-    <Form onSubmit={handleSearchSubmit} className="!flex !flex-auto px-5">
+    <Form onSubmit={handleSearchSubmit}
+    className="!flex !flex-auto">
       <Form.Control
       type="search"
       name="searchInput"
